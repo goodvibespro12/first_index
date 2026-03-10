@@ -466,8 +466,9 @@
             .stats-bar { flex-direction: column; gap: 1.5rem; }
             .logo img { height: 48px; max-height: 56px; }
             /* ensure hero slides fit viewport width on small screens */
-            .hero { overflow: hidden; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
-            .hero-slide { object-position: center top; width: 100vw; }
+            .hero { overflow: hidden; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; background-color: var(--primary-navy); }
+            /* show entire image on mobile without cropping */
+            .hero-slide { object-fit: contain; object-position: center center; width: 100%; height: 100%; background-color: var(--primary-navy); }
         }
 
             /* Modal styles */
