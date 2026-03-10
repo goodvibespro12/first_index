@@ -50,7 +50,7 @@
         }
 
         .logo {
-            display: inline-flex;
+            display: none;
             align-items: center;
             gap: 0.5rem;
             transition: var(--transition);
@@ -71,6 +71,7 @@
             list-style: none;
             gap: 2.5rem;
             align-items: center;
+            margin-left: auto;
         }
 
         nav a {
@@ -496,8 +497,8 @@
             /* Adjust ratio for portrait/square images on small phones */
             .hero { aspect-ratio: 4 / 3; }  /* ← change to 1/1 if images are square */
 
-            /* stack CTAs and constrain widths on mobile */
-            .hero-cta { left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
+            /* hide CTAs on mobile */
+            .hero-cta { display: none; left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
             .hero-cta .btn-primary { width: 100%; max-width: 280px; height: 36px; line-height: 36px; padding: 0 0.5rem; box-shadow: none; border-radius: 8px; font-size: 0.85rem; }
             .hero-cta .btn-primary:hover { transform: translateY(-1px); }
         }
@@ -519,7 +520,7 @@
         <div class="logo"><img src="images/logo.png" alt="Numero logo"></div>
         <ul class="nav-menu">
             <li><a href="#services">Services</a></li>
-            <li><a href="#features">Features</a></li>
+            <li><a href="#about-who">About Us</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#" id="nav-book-demo" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Book Demo</a></li>
         </ul>
