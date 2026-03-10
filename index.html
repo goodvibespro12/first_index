@@ -455,20 +455,47 @@
 
             .services-grid { grid-template-columns: 1fr; }
             .stats-bar { flex-direction: column; gap: 2rem; }
-            .hero-image { min-height: 300px; }
+
+            /* ── HERO MOBILE FIX ────────────────────────────────────────────
+               Problem: a fixed `vh` height clips images that don't fill that
+               exact ratio. Solution: drop all fixed heights and let the hero
+               size itself via aspect-ratio so the container always matches
+               the image proportions — zero cropping guaranteed.
+            ──────────────────────────────────────────────────────────────── */
+            .hero {
+                /* undo full-bleed negative-margin trick that causes overflow */
+                width: 100% !important;
+                left: auto !important;
+                right: auto !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                /* height grows from width via ratio — no more fixed vh clipping */
+                height: auto !important;
+                min-height: unset !important;
+                aspect-ratio: 16 / 9;   /* ← set this to your images' actual ratio */
+                background: #f7fafc;
+                overflow: hidden;
+            }
+
+            /* show the full image without cropping */
+            .hero-slide,
+            .hero-image {
+                object-fit: contain !important;
+                object-position: center center !important;
+                background: #f7fafc;
+            }
         }
 
         @media (max-width: 640px) {
             .section-header h2 { font-size: 2rem; }
             .hero-content h1 { font-size: 2rem; }
-            .hero { padding: 0; min-height: 35vh; height: 35vh; overflow: hidden; }
             .hero::before { display: none; }
             .stats-bar { flex-direction: column; gap: 1.5rem; }
             .logo img { height: 48px; max-height: 56px; }
-            /* mobile: restore natural flow so hero doesn't extend past viewport */
-            .hero { width: 100%; left: auto; right: auto; margin-left: 0; margin-right: 0; background: #f7fafc; }
-            /* show entire image without cropping on mobile */
-            .hero-slide { object-fit: contain; object-position: center center; width: 100%; height: 100%; background: #f7fafc; }
+
+            /* Adjust ratio for portrait/square images on small phones */
+            .hero { aspect-ratio: 4 / 3; }  /* ← change to 1/1 if images are square */
+
             /* stack CTAs and constrain widths on mobile */
             .hero-cta { left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
             .hero-cta .btn-primary { width: 100%; max-width: 280px; height: 36px; line-height: 36px; padding: 0 0.5rem; box-shadow: none; border-radius: 8px; font-size: 0.85rem; }
