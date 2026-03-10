@@ -466,9 +466,9 @@
             .stats-bar { flex-direction: column; gap: 1.5rem; }
             .logo img { height: 48px; max-height: 56px; }
             /* mobile: restore natural flow so hero doesn't extend past viewport */
-            .hero { width: 100%; left: auto; right: auto; margin-left: 0; margin-right: 0; background: transparent; }
-            /* keep image filling hero area without visible navy letterbox */
-            .hero-slide { object-fit: cover; object-position: center top; width: 100%; height: 100%; background: transparent; }
+            .hero { width: 100%; left: auto; right: auto; margin-left: 0; margin-right: 0; background: #f7fafc; }
+            /* show entire image without cropping on mobile */
+            .hero-slide { object-fit: contain; object-position: center center; width: 100%; height: 100%; background: #f7fafc; }
             /* stack CTAs and constrain widths on mobile */
             .hero-cta { left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
             .hero-cta .btn-primary { width: 100%; max-width: 280px; height: 36px; line-height: 36px; padding: 0 0.5rem; box-shadow: none; border-radius: 8px; font-size: 0.85rem; }
