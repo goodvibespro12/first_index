@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Numero | Premier Medical Society & Conference Platform</title>
+    <title>Company | Premier Medical Society & Conference Platform</title>
     <style>
         * {
             margin: 0;
@@ -50,7 +50,7 @@
         }
 
         .logo {
-            display: none;
+            display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: var(--transition);
@@ -71,7 +71,6 @@
             list-style: none;
             gap: 2.5rem;
             align-items: center;
-            margin-left: auto;
         }
 
         nav a {
@@ -456,49 +455,22 @@
 
             .services-grid { grid-template-columns: 1fr; }
             .stats-bar { flex-direction: column; gap: 2rem; }
-
-            /* ── HERO MOBILE FIX ────────────────────────────────────────────
-               Problem: a fixed `vh` height clips images that don't fill that
-               exact ratio. Solution: drop all fixed heights and let the hero
-               size itself via aspect-ratio so the container always matches
-               the image proportions — zero cropping guaranteed.
-            ──────────────────────────────────────────────────────────────── */
-            .hero {
-                /* undo full-bleed negative-margin trick that causes overflow */
-                width: 100% !important;
-                left: auto !important;
-                right: auto !important;
-                margin-left: 0 !important;
-                margin-right: 0 !important;
-                /* height grows from width via ratio — no more fixed vh clipping */
-                height: auto !important;
-                min-height: unset !important;
-                aspect-ratio: 16 / 9;   /* ← set this to your images' actual ratio */
-                background: #f7fafc;
-                overflow: hidden;
-            }
-
-            /* show the full image without cropping */
-            .hero-slide,
-            .hero-image {
-                object-fit: contain !important;
-                object-position: center center !important;
-                background: #f7fafc;
-            }
+            .hero-image { min-height: 300px; }
         }
 
         @media (max-width: 640px) {
             .section-header h2 { font-size: 2rem; }
             .hero-content h1 { font-size: 2rem; }
+            .hero { padding: 0; min-height: 35vh; height: 35vh; overflow: hidden; }
             .hero::before { display: none; }
             .stats-bar { flex-direction: column; gap: 1.5rem; }
             .logo img { height: 48px; max-height: 56px; }
-
-            /* Adjust ratio for portrait/square images on small phones */
-            .hero { aspect-ratio: 4 / 3; }  /* ← change to 1/1 if images are square */
-
-            /* hide CTAs on mobile */
-            .hero-cta { display: none; left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
+            /* mobile: restore natural flow so hero doesn't extend past viewport */
+            .hero { width: 100%; left: auto; right: auto; margin-left: 0; margin-right: 0; background: #f7fafc; }
+            /* show entire image without cropping on mobile */
+            .hero-slide { object-fit: contain; object-position: center center; width: 100%; height: 100%; background: #f7fafc; }
+            /* stack CTAs and constrain widths on mobile */
+            .hero-cta { left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
             .hero-cta .btn-primary { width: 100%; max-width: 280px; height: 36px; line-height: 36px; padding: 0 0.5rem; box-shadow: none; border-radius: 8px; font-size: 0.85rem; }
             .hero-cta .btn-primary:hover { transform: translateY(-1px); }
         }
@@ -517,10 +489,10 @@
 <body>
 
     <nav>
-        <div class="logo"><img src="images/logo.png" alt="Numero logo"></div>
+        <div class="logo"><img src="images/logo.png" alt="Company logo"></div>
         <ul class="nav-menu">
             <li><a href="#services">Services</a></li>
-            <li><a href="#about-who">About Us</a></li>
+            <li><a href="#features">Features</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
             <li><a href="#" id="nav-book-demo" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Book Demo</a></li>
         </ul>
@@ -656,7 +628,7 @@
 
     <section style="background: var(--primary-navy); padding: 6rem 5%; text-align: center; color: white;">
         <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Transform Your Conference?</h2>
-        <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.2rem;">Join the leading medical societies worldwide using Numero.</p>
+        <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.2rem;">Join the leading medical societies worldwide using Company.</p>
         <a href="#" class="btn btn-primary" style="background: var(--accent-orange); box-shadow: 0 10px 15px rgba(249, 115, 22, 0.3);">Get Started Today</a>
     </section>
 
@@ -667,19 +639,19 @@
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
             <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Numero has transformed how we manage our annual conference. The platform is intuitive and the support team is exceptional."</p>
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Company has transformed how we manage our annual conference. The platform is intuitive and the support team is exceptional."</p>
                 <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Dr. Sarah Mitchell</p>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">American Heart Association</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Heart Association</p>
             </div>
             <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--accent-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                 <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Registration went from chaotic to seamless. Our attendees loved the experience, and we've already booked for next year."</p>
                 <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Prof. James Chen</p>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">International Medical Society</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Medical Society</p>
             </div>
             <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
                 <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"The analytics dashboard has given us insights we never had before. Data-driven decisions are now the norm for us."</p>
                 <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Ms. Victoria Rodriguez</p>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">European Healthcare Conference</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Healthcare Conference</p>
             </div>
         </div>
     </section>
@@ -687,7 +659,7 @@
     <footer style="padding: 4rem 5%; background: var(--primary-navy); color: white;">
         <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem;">
             <div>
-                <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">About Numero</h3>
+                <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">About Company</h3>
                 <p style="color: #94a3b8; font-size: 0.95rem;">The premier platform trusted by 500+ medical societies and conferences worldwide to deliver exceptional experiences.</p>
             </div>
             <div>
@@ -719,7 +691,7 @@
             </div>
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: #94a3b8;">
-            <p>&copy; 2026 Numero Platform. All rights reserved. | Transforming Medical Conferences across India</p>
+            <p>&copy; 2026 Company Platform. All rights reserved. | Transforming Medical Conferences across India</p>
         </div>
     </footer>
 
