@@ -32,6 +32,7 @@
             background-color: var(--soft-bg);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* --- NAVIGATION --- */
@@ -153,6 +154,7 @@
             display: block;
             transform: translateX(100%);
             will-change: transform;
+            max-width: none;
         }
 
         /* Hero CTA overlay */
@@ -463,6 +465,9 @@
             .hero::before { display: none; }
             .stats-bar { flex-direction: column; gap: 1.5rem; }
             .logo img { height: 48px; max-height: 56px; }
+            /* ensure hero slides fit viewport width on small screens */
+            .hero { overflow: hidden; width: 100vw; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
+            .hero-slide { object-position: center top; width: 100vw; }
         }
 
             /* Modal styles */
