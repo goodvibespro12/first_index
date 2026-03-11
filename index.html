@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +47,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
@@ -64,7 +65,9 @@
             max-height: 72px;
         }
 
-        .logo:hover img { filter: brightness(0.95); }
+        .logo:hover img {
+            filter: brightness(0.95);
+        }
 
         .nav-menu {
             display: flex;
@@ -81,7 +84,9 @@
             transition: var(--transition);
         }
 
-        nav a:hover { color: var(--brand-blue); }
+        nav a:hover {
+            color: var(--brand-blue);
+        }
 
         .hamburger {
             display: none;
@@ -131,7 +136,9 @@
         }
 
         /* remove decorative overlay for the image-only hero */
-        .hero::before { display: none; }
+        .hero::before {
+            display: none;
+        }
 
         .hero-image {
             width: 100%;
@@ -173,24 +180,30 @@
 
         /* Make hero CTAs visually identical: grey default, blue on hover */
         .hero-cta .btn-primary {
-            background: #e5e7eb; /* light gray */
+            background: #e5e7eb;
+            /* light gray */
             color: var(--primary-navy);
-            width: 260px; /* fixed, identical width for both CTAs */
-            height: 48px; /* fixed height to ensure identical button heights */
-            line-height: 48px; /* vertically center single-line text */
-            white-space: nowrap; /* prevent wrapping which caused uneven height */
+            width: 260px;
+            /* fixed, identical width for both CTAs */
+            height: 48px;
+            /* fixed height to ensure identical button heights */
+            line-height: 48px;
+            /* vertically center single-line text */
+            white-space: nowrap;
+            /* prevent wrapping which caused uneven height */
             display: inline-flex;
             align-items: center;
             justify-content: center;
             border-radius: 12px;
-            box-shadow: 0 6px 0 rgba(0,0,0,0.06);
-            border: 1px solid rgba(15,23,42,0.06);
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(15, 23, 42, 0.06);
             transition: background 0.24s ease, color 0.24s ease, transform 0.12s ease;
             text-transform: uppercase;
             letter-spacing: 0.6px;
             font-weight: 700;
             font-size: 0.95rem;
-            padding: 0; /* reset padding since height/line-height control size */
+            padding: 0;
+            /* reset padding since height/line-height control size */
         }
 
         .hero-cta .btn-primary:hover {
@@ -200,12 +213,16 @@
         }
 
         .btn-secondary {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             color: white;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        .btn-cta { padding: 0.9rem 1.6rem; border-radius: 999px; font-weight:700; }
+        .btn-cta {
+            padding: 0.9rem 1.6rem;
+            border-radius: 999px;
+            font-weight: 700;
+        }
 
         .hero-content {
             position: relative;
@@ -277,7 +294,7 @@
             border-radius: 24px;
             overflow: hidden;
             transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
         }
@@ -350,7 +367,7 @@
             padding: 4rem 5%;
             display: flex;
             justify-content: space-around;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
             text-align: center;
         }
 
@@ -361,33 +378,84 @@
             padding: 4rem 5%;
             background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(2,6,23,0.04);
-            border: 1px solid rgba(2,6,23,0.03);
+            box-shadow: 0 20px 40px rgba(2, 6, 23, 0.04);
+            border: 1px solid rgba(2, 6, 23, 0.03);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3.5rem;
             align-items: center;
         }
 
-        .about-card img { width: 100%; border-radius: 20px; display:block; }
+        .about-card img {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+        }
 
         /* Make about headings and body match site sections */
-        .about-title { color: var(--accent-orange); font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; }
-        .about-text { color: var(--text-muted); line-height: 1.8; font-size: 1rem; max-width: 720px; }
+        .about-title {
+            color: var(--accent-orange);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
 
-        .why-list { list-style: none; padding: 0; margin: 0; }
-        .why-list li { display: block; padding: 1rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
-        .why-list li:last-child { border-bottom: none; }
-        .why-heading { font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem; font-size: 1.05rem; }
-        .why-desc { margin: 0 0 0.25rem 0; color: var(--text-muted); font-size: 0.97rem; line-height: 1.6; }
+        .about-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1rem;
+            max-width: 720px;
+        }
+
+        .why-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .why-list li {
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .why-list li:last-child {
+            border-bottom: none;
+        }
+
+        .why-heading {
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+
+        .why-desc {
+            margin: 0 0 0.25rem 0;
+            color: var(--text-muted);
+            font-size: 0.97rem;
+            line-height: 1.6;
+        }
 
         /* alternate layout for second row (text left, image right) */
-        .about-section.alt { grid-auto-flow: dense; }
-        .about-section.alt .about-card { order: 2; }
+        .about-section.alt {
+            grid-auto-flow: dense;
+        }
+
+        .about-section.alt .about-card {
+            order: 2;
+        }
 
         @media (max-width: 900px) {
-            .about-section { grid-template-columns: 1fr; gap: 2rem; margin: 3rem auto; }
-            .about-section.alt .about-card { order: 0; }
+            .about-section {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin: 3rem auto;
+            }
+
+            .about-section.alt .about-card {
+                order: 0;
+            }
         }
 
         .stat-val {
@@ -404,26 +472,42 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-            .hero { 
+            .hero {
                 width: 100vw;
                 left: 50%;
                 right: 50%;
                 margin-left: -50vw;
                 margin-right: -50vw;
-                text-align: center; 
+                text-align: center;
                 padding: 0;
                 min-height: 50vh;
                 height: 50vh;
             }
-            .hero::before { width: 300px; height: 300px; }
-            .hero-content h1 { font-size: 2.8rem; }
-            .hero-content p { margin: 0 auto 2.5rem; }
+
+            .hero::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                margin: 0 auto 2.5rem;
+            }
+
             /* hero image is background now; no separate img element */
         }
 
         @media (max-width: 1024px) {
+
             /* center CTAs on medium and small screens */
-            .hero-cta { left: 50%; transform: translateX(-50%); bottom: 8%; }
+            .hero-cta {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 8%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -440,9 +524,9 @@
                 flex-direction: column;
                 background: white;
                 padding: 2rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 gap: 1.5rem;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             }
 
             .nav-menu.active {
@@ -453,39 +537,706 @@
                 padding: 1rem 5%;
             }
 
-            .services-grid { grid-template-columns: 1fr; }
-            .stats-bar { flex-direction: column; gap: 2rem; }
-            .hero-image { min-height: 300px; }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                min-height: 300px;
+            }
         }
 
         @media (max-width: 640px) {
-            .section-header h2 { font-size: 2rem; }
-            .hero-content h1 { font-size: 2rem; }
-            .hero { padding: 0; min-height: 35vh; height: 35vh; overflow: hidden; }
-            .hero::before { display: none; }
-            .stats-bar { flex-direction: column; gap: 1.5rem; }
-            .logo img { height: 48px; max-height: 56px; }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 0;
+                min-height: 35vh;
+                height: 35vh;
+                overflow: hidden;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .logo img {
+                height: 48px;
+                max-height: 56px;
+            }
+
             /* mobile: restore natural flow so hero doesn't extend past viewport */
-            .hero { width: 100%; left: auto; right: auto; margin-left: 0; margin-right: 0; background: #f7fafc; }
+            .hero {
+                width: 100%;
+                left: auto;
+                right: auto;
+                margin-left: 0;
+                margin-right: 0;
+                background: #f7fafc;
+            }
+
             /* show entire image without cropping on mobile */
-            .hero-slide { object-fit: contain; object-position: center center; width: 100%; height: 100%; background: #f7fafc; }
+            .hero-slide {
+                object-fit: contain;
+                object-position: center center;
+                width: 100%;
+                height: 100%;
+                background: #f7fafc;
+            }
+
             /* stack CTAs and constrain widths on mobile */
-            .hero-cta { left: 50%; transform: translateX(-50%); bottom: 5%; flex-direction: column; gap: 0.5rem; align-items: center; max-width: 92%; padding: 0 6px; }
-            .hero-cta .btn-primary { width: 100%; max-width: 280px; height: 36px; line-height: 36px; padding: 0 0.5rem; box-shadow: none; border-radius: 8px; font-size: 0.85rem; }
-            .hero-cta .btn-primary:hover { transform: translateY(-1px); }
+            .hero-cta {
+                left: 50%;
+                transform: translateX(-50%);
+                bottom: 5%;
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: center;
+                max-width: 92%;
+                padding: 0 6px;
+            }
+
+            .hero-cta .btn-primary {
+                width: 100%;
+                max-width: 280px;
+                height: 36px;
+                line-height: 36px;
+                padding: 0 0.5rem;
+                box-shadow: none;
+                border-radius: 8px;
+                font-size: 0.85rem;
+            }
+
+            .hero-cta .btn-primary:hover {
+                transform: translateY(-1px);
+            }
         }
 
-            /* Modal styles */
-            .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(3,7,18,0.6); z-index: 2000; }
-            .modal.open { display: flex; }
-            .modal-dialog { background: white; color: var(--text-main); padding: 2rem; border-radius: 12px; width: 95%; max-width: 540px; box-shadow: 0 30px 60px rgba(2,6,23,0.4); position: relative; }
-            .modal-close { position: absolute; right: 12px; top: 8px; border: none; background: transparent; font-size: 1.6rem; cursor: pointer; }
-            #demo-form { display: flex; flex-direction: column; gap: 0.75rem; }
-            #demo-form label { display: flex; flex-direction: column; font-size: 0.9rem; color: var(--text-muted); }
-            #demo-form input, #demo-form textarea { padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid rgba(15,23,42,0.08); font-size: 0.95rem; }
-            #demo-form button { margin-top: 0.5rem; align-self: flex-start; }
+        /* Modal styles */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(3, 7, 18, 0.6);
+            z-index: 2000;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-dialog {
+            background: white;
+            color: var(--text-main);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 95%;
+            max-width: 540px;
+            box-shadow: 0 30px 60px rgba(2, 6, 23, 0.4);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 12px;
+            top: 8px;
+            border: none;
+            background: transparent;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        #demo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        #demo-form label {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        #demo-form input,
+        #demo-form textarea {
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            font-size: 0.95rem;
+        }
+
+        #demo-form button {
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+
+        /* ══════════════════════════════════════════
+           FLOATING CHATBOT WIDGET
+           ══════════════════════════════════════════ */
+        #chatbot-fab {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 3000;
+            width: 74px;
+            height: 74px;
+            border-radius: 22px;
+            border: none;
+            background: linear-gradient(135deg, #f97316, #e11d48);
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(225, 29, 72, 0.45), 0 0 0 0 rgba(225, 29, 72, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: fabPulse 3s ease-in-out infinite;
+        }
+
+        #chatbot-fab:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 40px rgba(225, 29, 72, 0.6);
+            animation: none;
+        }
+
+        #chatbot-fab.open {
+            border-radius: 50%;
+            animation: none;
+            width: 64px;
+            height: 64px;
+            right: 28px;
+            bottom: 28px;
+        }
+
+        #chatbot-fab .fab-close {
+            display: none;
+            font-size: 26px;
+        }
+
+        #chatbot-fab.open .fab-icon {
+            display: none;
+        }
+
+        #chatbot-fab.open .fab-close {
+            display: block;
+        }
+
+        @keyframes fabPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 8px 32px rgba(225, 29, 72, 0.45), 0 0 0 0 rgba(225, 29, 72, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 8px 32px rgba(225, 29, 72, 0.45), 0 0 0 16px rgba(225, 29, 72, 0);
+            }
+        }
+
+        /* Tooltip on FAB */
+        #chatbot-fab::after {
+            content: 'Chat with us!';
+            position: absolute;
+            right: 72px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-navy);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        #chatbot-fab:hover::after {
+            opacity: 1;
+        }
+
+        #chatbot-fab.open::after {
+            display: none;
+        }
+
+        /* Chat Panel */
+        #chatbot-panel {
+            position: fixed;
+            bottom: 100px;
+            right: 28px;
+            z-index: 2999;
+            width: 420px;
+            height: 580px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: none;
+            flex-direction: column;
+            background: #0a0e1a;
+            border: 1px solid #1e2d45;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03);
+            animation: panelIn 0.3s ease both;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        #chatbot-panel.open {
+            display: flex;
+        }
+
+        @keyframes panelIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Panel Header */
+        .cb-header {
+            background: rgba(17, 24, 39, 0.97);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1e2d45;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .cb-header-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.25);
+        }
+
+        .cb-header-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #e8edf5;
+            margin: 0;
+        }
+
+        .cb-header-text span {
+            font-size: 11px;
+            color: #6b7fa0;
+        }
+
+        .cb-status {
+            margin-left: auto;
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            border-radius: 12px;
+            padding: 3px 10px;
+            font-size: 10px;
+            color: #34d399;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cb-status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #34d399;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes cbPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .35;
+            }
+        }
+
+        /* Messages */
+        .cb-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 16px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            scroll-behavior: smooth;
+        }
+
+        .cb-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .cb-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .cb-messages::-webkit-scrollbar-thumb {
+            background: #1e2d45;
+            border-radius: 2px;
+        }
+
+        .cb-msg-row {
+            display: flex;
+            gap: 8px;
+            max-width: 90%;
+            animation: cbMsgIn 0.3s ease both;
+        }
+
+        @keyframes cbMsgIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cb-msg-row.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .cb-msg-row.bot {
+            align-self: flex-start;
+        }
+
+        .cb-msg-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .cb-msg-row.bot .cb-msg-avatar {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+        }
+
+        .cb-msg-row.user .cb-msg-avatar {
+            background: linear-gradient(135deg, #8b5cf6, #fb7185);
+        }
+
+        .cb-msg-bubble {
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        .cb-msg-row.user .cb-msg-bubble {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .cb-msg-row.bot .cb-msg-bubble {
+            background: #1a2235;
+            border: 1px solid #1e2d45;
+            color: #e8edf5;
+            border-bottom-left-radius: 4px;
+        }
+
+        .cb-msg-bubble strong {
+            color: #06b6d4;
+            font-weight: 700;
+        }
+
+        .cb-msg-source {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            margin-top: 6px;
+            padding: 2px 8px;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 5px;
+            font-size: 9px;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .cb-msg-time {
+            font-size: 9px;
+            color: #3d4f6a;
+            margin-top: 3px;
+            padding: 0 3px;
+        }
+
+        .cb-msg-row.user .cb-msg-time {
+            text-align: right;
+        }
+
+        /* Typing */
+        .cb-typing {
+            display: none;
+            align-self: flex-start;
+            gap: 8px;
+            max-width: 90%;
+        }
+
+        .cb-typing.active {
+            display: flex;
+        }
+
+        .cb-typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #1a2235;
+            border: 1px solid #1e2d45;
+            border-radius: 14px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .cb-typing-dots span {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #6b7fa0;
+            animation: cbTyping 1.4s ease infinite;
+        }
+
+        .cb-typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .cb-typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes cbTyping {
+
+            0%,
+            60%,
+            100% {
+                opacity: .3;
+                transform: translateY(0);
+            }
+
+            30% {
+                opacity: 1;
+                transform: translateY(-3px);
+            }
+        }
+
+        /* Suggestions */
+        .cb-suggestions {
+            padding: 6px 14px;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+
+        .cb-chip {
+            background: #1a2235;
+            border: 1px solid #1e2d45;
+            border-radius: 14px;
+            padding: 5px 11px;
+            font-size: 10.5px;
+            color: #6b7fa0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .cb-chip:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        /* Input */
+        .cb-input-area {
+            padding: 10px 14px 14px;
+            flex-shrink: 0;
+        }
+
+        .cb-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #111827;
+            border: 1px solid #1e2d45;
+            border-radius: 12px;
+            padding: 4px 6px 4px 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .cb-input-wrap:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .cb-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #e8edf5;
+            font-size: 13px;
+            font-family: 'Inter', sans-serif;
+            padding: 8px 0;
+            min-width: 0;
+        }
+
+        .cb-input::placeholder {
+            color: #3d4f6a;
+        }
+
+        .cb-send-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform 0.15s;
+        }
+
+        .cb-send-btn:hover {
+            transform: scale(1.06);
+        }
+
+        /* Welcome */
+        .cb-welcome {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px 16px;
+            gap: 12px;
+        }
+
+        .cb-welcome-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 0 28px rgba(59, 130, 246, 0.25);
+            animation: cbFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes cbFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .cb-welcome h3 {
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #e8edf5, #06b6d4, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cb-welcome p {
+            font-size: 12px;
+            color: #6b7fa0;
+            max-width: 300px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            #chatbot-panel {
+                width: calc(100vw - 24px);
+                height: calc(100vh - 140px);
+                right: 12px;
+                bottom: 100px;
+                border-radius: 16px;
+            }
+
+            #chatbot-fab {
+                bottom: 20px;
+                right: 20px;
+                width: 64px;
+                height: 64px;
+                border-radius: 20px;
+                font-size: 30px;
+            }
+
+            #chatbot-fab.open {
+                width: 56px;
+                height: 56px;
+                right: 20px;
+                bottom: 20px;
+            }
+
+            #chatbot-fab::after {
+                display: none;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <nav>
@@ -494,7 +1245,8 @@
             <li><a href="#services">Services</a></li>
             <li><a href="#features">Features</a></li>
             <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#" id="nav-book-demo" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Book Demo</a></li>
+            <li><a href="#" id="nav-book-demo" class="btn btn-primary" style="padding: 0.6rem 1.2rem;">Book Demo</a>
+            </li>
         </ul>
         <div class="hamburger">
             <span></span>
@@ -527,21 +1279,25 @@
         <div class="services-grid">
             <div class="service-card">
                 <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" alt="Website UI">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80"
+                        alt="Website UI">
                 </div>
                 <div class="card-body">
                     <h3>Society / Conference Website</h3>
-                    <p>High-performance, CME-integrated portals designed to be the digital heartbeat of your event and organization.</p>
+                    <p>High-performance, CME-integrated portals designed to be the digital heartbeat of your event and
+                        organization.</p>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=600&q=80" alt="Registration">
+                    <img src="https://images.unsplash.com/photo-1556742044-3c52d6e88c62?auto=format&fit=crop&w=600&q=80"
+                        alt="Registration">
                 </div>
                 <div class="card-body">
                     <h3>Delegate Registration</h3>
-                    <p>Frictionless sign-up workflows with secure payment gateways and multi-tier ticketing for specialists and residents.</p>
+                    <p>Frictionless sign-up workflows with secure payment gateways and multi-tier ticketing for
+                        specialists and residents.</p>
                 </div>
             </div>
 
@@ -551,17 +1307,20 @@
                 </div>
                 <div class="card-body">
                     <h3>Scientific Program / Abstract Management</h3>
-                    <p>Powerful peer-review tools to curate world-class content, manage oral sessions, and digital poster galleries.</p>
+                    <p>Powerful peer-review tools to curate world-class content, manage oral sessions, and digital
+                        poster galleries.</p>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Hotel">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80"
+                        alt="Hotel">
                 </div>
                 <div class="card-body">
                     <h3>Accommodation Module</h3>
-                    <p>Integrated hotel booking systems ensuring your delegates stay in premium comfort at exclusive pre-negotiated rates.</p>
+                    <p>Integrated hotel booking systems ensuring your delegates stay in premium comfort at exclusive
+                        pre-negotiated rates.</p>
                 </div>
             </div>
 
@@ -571,7 +1330,8 @@
                 </div>
                 <div class="card-body">
                     <h3>Membership Management</h3>
-                    <p>A 365-day engagement engine to track credentials, automate renewals, and foster a thriving medical community.</p>
+                    <p>A 365-day engagement engine to track credentials, automate renewals, and foster a thriving
+                        medical community.</p>
                 </div>
             </div>
 
@@ -581,7 +1341,8 @@
                 </div>
                 <div class="card-body">
                     <h3>Managed Services for Societies</h3>
-                    <p>Expert backend support including sponsorship procurement, vendor management, and flawless on-site execution.</p>
+                    <p>Expert backend support including sponsorship procurement, vendor management, and flawless on-site
+                        execution.</p>
                 </div>
             </div>
         </div>
@@ -594,8 +1355,11 @@
         </div>
         <div>
             <h2 id="about-who" class="about-title">Who we are</h2>
-            <p class="about-text">A group of passionate individuals who think disruptively to deliver IT solutions for the toughest challenges. We architect and engineer complex software products with user-centric design in scalable model.</p>
-            <p class="about-text" style="margin-top:1rem;">We help our associates implement strategies to define the growth by pushing the boundaries of emerging technologies.</p>
+            <p class="about-text">A group of passionate individuals who think disruptively to deliver IT solutions for
+                the toughest challenges. We architect and engineer complex software products with user-centric design in
+                scalable model.</p>
+            <p class="about-text" style="margin-top:1rem;">We help our associates implement strategies to define the
+                growth by pushing the boundaries of emerging technologies.</p>
         </div>
     </section>
 
@@ -605,19 +1369,23 @@
             <ul class="why-list">
                 <li>
                     <div class="why-heading">Data-Driven Strategic Insights</div>
-                    <p class="why-desc">We leverage advanced analytics to uncover actionable insights that drive smarter decisions for medical societies and conferences.</p>
+                    <p class="why-desc">We leverage advanced analytics to uncover actionable insights that drive smarter
+                        decisions for medical societies and conferences.</p>
                 </li>
                 <li>
                     <div class="why-heading">Personalized Engagement Intelligence</div>
-                    <p class="why-desc">Tailored recommendations for doctors, delegates, and stakeholders using behavioral and participation analytics.</p>
+                    <p class="why-desc">Tailored recommendations for doctors, delegates, and stakeholders using
+                        behavioral and participation analytics.</p>
                 </li>
                 <li>
                     <div class="why-heading">Transparent &amp; Measurable Outcomes</div>
-                    <p class="why-desc">Clear reporting, dashboards, and KPIs that ensure complete visibility into engagement, impact, and ROI.</p>
+                    <p class="why-desc">Clear reporting, dashboards, and KPIs that ensure complete visibility into
+                        engagement, impact, and ROI.</p>
                 </li>
                 <li>
                     <div class="why-heading">Advanced Analytics &amp; AI-Powered Techniques</div>
-                    <p class="why-desc">Cutting-edge data science, machine learning, and predictive models to optimize conference planning and audience engagement.</p>
+                    <p class="why-desc">Cutting-edge data science, machine learning, and predictive models to optimize
+                        conference planning and audience engagement.</p>
                 </li>
             </ul>
         </div>
@@ -628,102 +1396,145 @@
 
     <section style="background: var(--primary-navy); padding: 6rem 5%; text-align: center; color: white;">
         <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Ready to Transform Your Conference?</h2>
-        <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.2rem;">Join the leading medical societies worldwide using Company.</p>
-        <a href="#" class="btn btn-primary" style="background: var(--accent-orange); box-shadow: 0 10px 15px rgba(249, 115, 22, 0.3);">Get Started Today</a>
+        <p style="color: #94a3b8; margin-bottom: 2.5rem; font-size: 1.2rem;">Join the leading medical societies
+            worldwide using Company.</p>
+        <a href="#" class="btn btn-primary"
+            style="background: var(--accent-orange); box-shadow: 0 10px 15px rgba(249, 115, 22, 0.3);">Get Started
+            Today</a>
     </section>
 
     <section id="testimonials" style="padding: 6rem 5%; background: white;">
         <div style="text-align: center; margin-bottom: 4rem;">
-            <span style="color: var(--brand-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; display: block; margin-bottom: 1rem;">Client Success</span>
+            <span
+                style="color: var(--brand-blue); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; display: block; margin-bottom: 1rem;">Client
+                Success</span>
             <h2 style="font-size: 2.5rem; color: var(--accent-orange); margin-bottom: 1.5rem;">What Our Clients Say</h2>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
-            <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Company has transformed how we manage our annual conference. The platform is intuitive and the support team is exceptional."</p>
+        <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; max-width: 1400px; margin: 0 auto;">
+            <div
+                style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Company
+                    has transformed how we manage our annual conference. The platform is intuitive and the support team
+                    is exceptional."</p>
                 <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Dr. Sarah Mitchell</p>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Heart Association</p>
             </div>
-            <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--accent-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"Registration went from chaotic to seamless. Our attendees loved the experience, and we've already booked for next year."</p>
+            <div
+                style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--accent-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">
+                    "Registration went from chaotic to seamless. Our attendees loved the experience, and we've already
+                    booked for next year."</p>
                 <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Prof. James Chen</p>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Medical Society</p>
             </div>
-            <div style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
-                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"The analytics dashboard has given us insights we never had before. Data-driven decisions are now the norm for us."</p>
-                <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Ms. Victoria Rodriguez</p>
+            <div
+                style="background: white; padding: 2.5rem; border-radius: 20px; border-left: 4px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.08);">
+                <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.8;">"The
+                    analytics dashboard has given us insights we never had before. Data-driven decisions are now the
+                    norm for us."</p>
+                <p style="font-weight: 700; color: var(--primary-navy); margin-bottom: 0.25rem;">Ms. Victoria Rodriguez
+                </p>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Indian Healthcare Conference</p>
             </div>
         </div>
     </section>
 
     <footer style="padding: 4rem 5%; background: var(--primary-navy); color: white;">
-        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem;">
+        <div
+            style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 2rem;">
             <div>
                 <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">About Company</h3>
-                <p style="color: #94a3b8; font-size: 0.95rem;">The premier platform trusted by 500+ medical societies and conferences worldwide to deliver exceptional experiences.</p>
+                <p style="color: #94a3b8; font-size: 0.95rem;">The premier platform trusted by 500+ medical societies
+                    and conferences worldwide to deliver exceptional experiences.</p>
             </div>
             <div>
                 <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Quick Links</h3>
                 <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.75rem;"><a href="#services" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Services</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#testimonials" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Case Studies</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Pricing</a></li>
-                    <li><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Blog</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#services"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Services</a>
+                    </li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#testimonials"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Case
+                            Studies</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Pricing</a>
+                    </li>
+                    <li><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Blog</a></li>
                 </ul>
             </div>
             <div>
                 <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Company</h3>
                 <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">About Us</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Careers</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Contact</a></li>
-                    <li><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Support</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">About Us</a>
+                    </li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Careers</a>
+                    </li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Contact</a>
+                    </li>
+                    <li><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Support</a>
+                    </li>
                 </ul>
             </div>
             <div>
                 <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Legal</h3>
                 <ul style="list-style: none;">
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Privacy Policy</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Terms of Service</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Security</a></li>
-                    <li><a href="#" style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Compliance</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Privacy
+                            Policy</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Terms of
+                            Service</a></li>
+                    <li style="margin-bottom: 0.75rem;"><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Security</a>
+                    </li>
+                    <li><a href="#"
+                            style="color: #94a3b8; text-decoration: none; transition: var(--transition);">Compliance</a>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: #94a3b8;">
+        <div
+            style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: #94a3b8;">
             <p>&copy; 2026 Company Platform. All rights reserved. | Transforming Medical Conferences across India</p>
         </div>
     </footer>
 
-        <!-- Demo modal (hidden by default) -->
-        <div id="demo-modal" class="modal" aria-hidden="true">
-            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-title">
-                <button class="modal-close" aria-label="Close">×</button>
-                <h2 id="demo-title">Request a Demo</h2>
-                <form id="demo-form">
-                    <label>Full name
-                        <input type="text" name="name" required>
-                    </label>
-                    <label>Work email
-                        <input type="email" name="email" required>
-                    </label>
-                    <label>Organization
-                        <input type="text" name="organization">
-                    </label>
-                    <label>Phone
-                        <input type="tel" name="phone">
-                    </label>
-                    <label>Preferred date/time
-                        <input type="text" name="preferred_time" placeholder="e.g. Week of Apr 12">
-                    </label>
-                    <label>Message
-                        <textarea name="message" rows="4"></textarea>
-                    </label>
-                    <button type="submit" class="btn btn-primary">Submit Request</button>
-                </form>
-                <div class="modal-success" style="display:none;margin-top:1rem;color:var(--text-main);">Thank you — we'll be in touch shortly.</div>
-            </div>
+    <!-- Demo modal (hidden by default) -->
+    <div id="demo-modal" class="modal" aria-hidden="true">
+        <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-title">
+            <button class="modal-close" aria-label="Close">×</button>
+            <h2 id="demo-title">Request a Demo</h2>
+            <form id="demo-form">
+                <label>Full name
+                    <input type="text" name="name" required>
+                </label>
+                <label>Work email
+                    <input type="email" name="email" required>
+                </label>
+                <label>Organization
+                    <input type="text" name="organization">
+                </label>
+                <label>Phone
+                    <input type="tel" name="phone">
+                </label>
+                <label>Preferred date/time
+                    <input type="text" name="preferred_time" placeholder="e.g. Week of Apr 12">
+                </label>
+                <label>Message
+                    <textarea name="message" rows="4"></textarea>
+                </label>
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+            </form>
+            <div class="modal-success" style="display:none;margin-top:1rem;color:var(--text-main);">Thank you — we'll be
+                in touch shortly.</div>
         </div>
+    </div>
 
     <script>
         // Mobile Menu Toggle
@@ -761,7 +1572,7 @@
         // Logo is non-clickable; no scroll handler attached
 
         // Demo modal logic
-        (function(){
+        (function () {
             const demoModal = document.getElementById('demo-modal');
             const openDemo = document.getElementById('open-demo');
             const navDemo = document.getElementById('nav-book-demo');
@@ -772,26 +1583,26 @@
             function open() {
                 if (!demoModal) return;
                 demoModal.classList.add('open');
-                demoModal.setAttribute('aria-hidden','false');
+                demoModal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
             }
             function close() {
                 if (!demoModal) return;
                 demoModal.classList.remove('open');
-                demoModal.setAttribute('aria-hidden','true');
+                demoModal.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
                 // reset form
                 if (form) { form.style.display = ''; form.reset(); }
                 if (success) success.style.display = 'none';
             }
 
-            if (openDemo) openDemo.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
-            if (navDemo) navDemo.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
+            if (openDemo) openDemo.addEventListener('click', (e) => { e.preventDefault(); open(); });
+            if (navDemo) navDemo.addEventListener('click', (e) => { e.preventDefault(); open(); });
             if (closeBtn) closeBtn.addEventListener('click', close);
-            if (demoModal) demoModal.addEventListener('click', (e)=>{ if (e.target === demoModal) close(); });
+            if (demoModal) demoModal.addEventListener('click', (e) => { if (e.target === demoModal) close(); });
 
             if (form) {
-                form.addEventListener('submit', (e)=>{
+                form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const data = Object.fromEntries(new FormData(form).entries());
                     console.log('Demo request submitted', data);
@@ -809,7 +1620,7 @@
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
@@ -826,7 +1637,7 @@
         });
 
         // Cycle hero images (loop) with right->left slide transition and fallback to gradient on error
-        (function() {
+        (function () {
             const hero = document.querySelector('.hero');
             const initialImg = document.querySelector('.hero-image');
             const heroSources = ['images/hero.png', 'images/hero2.jpg'];
@@ -860,7 +1671,7 @@
 
             function fallbackToGradient() {
                 clearInterval(intervalId);
-                try { imgA.remove(); imgB.remove(); } catch(e){}
+                try { imgA.remove(); imgB.remove(); } catch (e) { }
                 hero.style.backgroundImage = 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)';
                 hero.style.backgroundSize = 'cover';
                 hero.style.backgroundPosition = 'center center';
@@ -906,15 +1717,338 @@
         })();
 
         // Add fallback for service images (replace with inline SVG placeholder on error)
-        (function(){
+        (function () {
             const placeholderSVG = encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360'><rect width='100%' height='100%' fill='%23f1f5f9'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%2394a3b8' font-family='Arial, Helvetica, sans-serif' font-size='20'>Image unavailable</text></svg>");
-            const fallback = 'data:image/svg+xml;charset=UTF-8,'+placeholderSVG;
+            const fallback = 'data:image/svg+xml;charset=UTF-8,' + placeholderSVG;
             document.querySelectorAll('.card-img-wrapper img').forEach(img => {
-                img.addEventListener('error', function() {
+                img.addEventListener('error', function () {
                     if (this.src !== fallback) this.src = fallback;
                 });
             });
         })();
     </script>
+
+    <!-- ══════════════════════════════════════════════
+         FLOATING CHATBOT WIDGET
+         ══════════════════════════════════════════════ -->
+    <button id="chatbot-fab" aria-label="Open AI Chat">
+        <span class="fab-icon">💬</span>
+        <span class="fab-close">✕</span>
+    </button>
+
+    <div id="chatbot-panel">
+        <!-- Header -->
+        <div class="cb-header">
+            <div class="cb-header-icon">🤖</div>
+            <div class="cb-header-text">
+                <h4>AI Assistant</h4>
+                <span>RAG-Powered Chat</span>
+            </div>
+            <div class="cb-status">
+                <span class="cb-status-dot"></span>Online
+                <button id="cbClear" title="Clear Chat" aria-label="Clear Chat" style="background:none; border:none; cursor:pointer; font-size:16px; margin-left:12px; opacity:0.8; transition:0.2s;">🗑️</button>
+            </div>
+        </div>
+
+        <!-- Welcome / Name Input -->
+        <div class="cb-welcome" id="cbWelcome">
+            <div class="cb-welcome-icon">💬</div>
+            <h3>Welcome!</h3>
+            <p>I'm your AI assistant. Before we begin, may I know your name?</p>
+            <div style="width:100%;max-width:280px;margin-top:6px;">
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <input type="text" id="cbNameInput" placeholder="Enter your name..." autocomplete="off" style="flex:1;background:#111827;border:1px solid #1e2d45;border-radius:10px;padding:9px 14px;
+                        color:#e8edf5;font-size:13px;font-family:'Inter',sans-serif;outline:none;" />
+                    <button id="cbNameBtn"
+                        style="width:36px;height:36px;border-radius:10px;border:none;
+                        background:linear-gradient(135deg,#3b82f6,#06b6d4);color:white;font-size:15px;
+                        cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">➤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="cb-messages" id="cbMessages" style="display:none;"></div>
+
+        <!-- Typing -->
+        <div class="cb-typing" id="cbTyping">
+            <div class="cb-msg-avatar" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);">🤖</div>
+            <div class="cb-typing-dots"><span></span><span></span><span></span></div>
+        </div>
+
+        <!-- Suggestions -->
+        <div class="cb-suggestions" id="cbSuggestions"></div>
+
+        <!-- Input -->
+        <div class="cb-input-area">
+            <div class="cb-input-wrap">
+                <input type="text" class="cb-input" id="cbInput" placeholder="Ask a question…" autocomplete="off" />
+                <button class="cb-send-btn" id="cbSend" aria-label="Send">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ════════════════════════════════════════════════════════════════
+         *  CHATBOT WIDGET — RAG ENGINE (self-contained)
+         * ════════════════════════════════════════════════════════════════ */
+        (function () {
+            // ── State ──
+            let cbKB = [];
+            let cbVectors = [];
+            let cbVocab = {};
+            let cbIDF = {};
+            let cbBusy = false;
+
+            // ── Embedded Knowledge Base ──
+            const KB_DATA = [
+                { id: "1", cat: "About Us", q: "Who are you?", a: "We are Numero \u2014 a team of passionate technologists and healthcare enthusiasts building India's leading medical conference platform. Since 2016, we've helped 500+ societies digitize their events and grow their communities.", kw: "about us who company numero team", src: "general" },
+                { id: "2", cat: "About Us", q: "What does your company do?", a: "We specialize in end-to-end medical conference management \u2014 from building stunning society websites to handling registrations, abstract reviews, analytics, and on-site execution. Think of us as your tech partner for medical events.", kw: "company what do services overview", src: "general" },
+                { id: "3", cat: "About Us", q: "What is your mission?", a: "Our mission is to empower medical societies with intelligent technology so they can focus on advancing healthcare \u2014 not wrestling with spreadsheets and logistics.", kw: "mission vision purpose goal", src: "general" },
+                { id: "4", cat: "About Us", q: "Where are you based?", a: "We're headquartered in India with teams supporting conferences across major cities including Mumbai, Delhi, Bangalore, Chennai, Hyderabad, and Kolkata.", kw: "location office based where headquarters india", src: "general" },
+                { id: "5", cat: "About Us", q: "How long have you been operating?", a: "We've been in operation since 2016 \u2014 that's nearly a decade of powering medical conferences. In that time, we've grown from a small startup to serving 500+ societies nationwide.", kw: "how long years experience history founded", src: "general" },
+                { id: "6", cat: "Services", q: "What services do you offer?", a: "We offer six core services: Conference Websites with CME integration, Delegate Registration with secure payments, Abstract Management with peer review, Accommodation booking, Membership Management, and full Managed Services for societies.", kw: "services offer provide what do", src: "index.html" },
+                { id: "7", cat: "Services", q: "Tell me about conference websites.", a: "Our conference websites are fully branded, CME-integrated portals that serve as the digital hub for your event \u2014 featuring schedules, speaker profiles, live updates, and seamless registration links.", kw: "website conference portal cms digital", src: "index.html" },
+                { id: "8", cat: "Services", q: "How does delegate registration work?", a: "Our registration module supports multi-tier ticketing (specialists, residents, students) with secure payment gateways, automatic e-badge generation, and real-time attendee tracking.", kw: "registration delegate sign up tickets payment", src: "index.html" },
+                { id: "9", cat: "Services", q: "What is abstract management?", a: "Our abstract management system handles the full lifecycle \u2014 from submission to peer review to acceptance. Organizers can track funnels, assign reviewers, and manage oral and poster sessions all in one place.", kw: "abstract management submission review peer", src: "index.html" },
+                { id: "10", cat: "Services", q: "Tell me about accommodation booking.", a: "We integrate hotel booking directly into the conference platform \u2014 delegates can browse partner hotels, compare pre-negotiated rates, and reserve rooms in just a few clicks.", kw: "accommodation hotel booking rooms stay", src: "index.html" },
+                { id: "11", cat: "Services", q: "How does membership management work?", a: "Our membership engine runs 365 days a year \u2014 tracking credentials, automating renewal reminders, managing CME credits, and maintaining a searchable member directory.", kw: "membership renewal credentials directory members", src: "index.html" },
+                { id: "12", cat: "Services", q: "What are managed services?", a: "Our managed services team handles everything behind the scenes \u2014 sponsorship procurement, vendor coordination, on-site logistics, and execution \u2014 so your committee can focus on the science.", kw: "managed services sponsorship vendor logistics", src: "index.html" },
+                { id: "13", cat: "Analytics", q: "How does the analytics dashboard work?", a: "We provide two powerful dashboards: a Doctor Dashboard for tracking submissions, specialties, and trends, and an Organizer Dashboard for monitoring conference health, reviewer workload, and room assignments.", kw: "analytics dashboard data insights reports", src: "dashboards" },
+                { id: "14", cat: "Analytics", q: "What can doctors see on their dashboard?", a: "Doctors get a bird's-eye view of their submission history, acceptance rates, trending specialties, upcoming conferences, and personalized recommendations based on their activity patterns.", kw: "doctor dashboard analytics submissions trends", src: "dashboards" },
+                { id: "15", cat: "Analytics", q: "What can organizers see?", a: "Organizers see live conference stats \u2014 submission funnels, reviewer workloads, attendee numbers, room mapping intelligence, and AI-powered alerts when something needs attention.", kw: "organizer dashboard conference status live", src: "dashboards" },
+                { id: "16", cat: "Analytics", q: "What is the acceptance rate for abstracts?", a: "Acceptance rates vary by specialty and year. On average, it's around 65\u201370%. Cardiology tends to have the highest rates, while emerging fields like Genomics are competitive but growing fast.", kw: "acceptance rate percentage abstracts approved", src: "dashboards" },
+                { id: "17", cat: "Analytics", q: "What specialties are trending?", a: "Genomics is currently the fastest-growing specialty with strong year-over-year growth. Neurology and Radiology are also seeing healthy increases. Cardiology leads overall in volume.", kw: "trending specialties topics growth genomics", src: "dashboards" },
+                { id: "18", cat: "Analytics", q: "How does the coverage radar work?", a: "The Coverage Radar is a visual tool that compares quality scores across specialties between years \u2014 helping organizers spot improvements and identify areas that need more attention.", kw: "radar coverage quality score comparison", src: "dashboards" },
+                { id: "19", cat: "Conference", q: "What conferences are upcoming?", a: "We typically have several conferences in the pipeline across India. Current upcoming events span specialties like Cardiology, Oncology, Neuroscience, and Pediatrics in cities like Mumbai, Delhi, Bangalore, and Chennai.", kw: "upcoming conferences events schedule dates", src: "dashboards" },
+                { id: "20", cat: "Conference", q: "Which cities host the most conferences?", a: "Mumbai leads as our top conference hub, followed by Delhi and Bangalore. Chennai, Hyderabad, and Kolkata also host significant events throughout the year.", kw: "cities locations venues mumbai delhi bangalore", src: "dashboards" },
+                { id: "21", cat: "Conference", q: "How do conferences get organized?", a: "Our platform guides organizers through every step \u2014 setting up the event site, opening abstract submissions, managing reviews, coordinating accommodation, and running day-of logistics.", kw: "organize conference setup plan manage how", src: "dashboards" },
+                { id: "22", cat: "Abstracts", q: "How does abstract submission work?", a: "Authors submit through our platform, selecting their specialty and topic. Submissions go through an automated workflow: Invited \u2192 Submitted \u2192 Under Review \u2192 Accepted/Rejected.", kw: "abstract submission process funnel how", src: "dashboards" },
+                { id: "23", cat: "Abstracts", q: "How are abstracts reviewed?", a: "We assign peer reviewers based on expertise and track their workload in real-time. The system flags overloaded reviewers and ensures fair distribution. Review completion rates consistently exceed 85%.", kw: "review peer reviewer workload scoring", src: "dashboards" },
+                { id: "24", cat: "Abstracts", q: "What is the abstract pipeline?", a: "The pipeline tracks every abstract from invitation through final decision \u2014 showing how many are submitted, under review, accepted, or rejected at any given moment.", kw: "pipeline status accepted rejected pending", src: "dashboards" },
+                { id: "25", cat: "Room Mapping", q: "How does room mapping work?", a: "Our intelligent room mapping assigns presentations to venues based on topic quality and audience size. Top-rated abstracts get premium halls, while workshops go to specialized bays.", kw: "room mapping conference halls venue tier", src: "dashboards" },
+                { id: "26", cat: "Follow-up", q: "How does doctor follow-up work?", a: "The platform identifies past submitters who haven't responded to current invitations and prioritizes them by engagement history. Organizers can send targeted nudge notifications with one click.", kw: "follow-up doctors priority nudge notification", src: "dashboards" },
+                { id: "27", cat: "Insights", q: "What insights does the platform provide?", a: "Our AI engine surfaces actionable alerts \u2014 like reviewer overload warnings, submission velocity drops, specialty gaps, and smart recommendations for optimizing your conference program.", kw: "insights alerts recommendations AI automated", src: "dashboards" },
+                { id: "28", cat: "Platform", q: "What are your platform stats?", a: "500+ conferences managed, 2.5 lakh delegates served, 99% uptime, and a 4.9/5 client rating. We've seen consistent double-digit growth year over year.", kw: "stats numbers conferences delegates uptime", src: "index.html" },
+                { id: "29", cat: "Platform", q: "Why should I choose Numero?", a: "Four reasons: data-driven strategic insights, personalized engagement intelligence, transparent measurable outcomes, and cutting-edge AI-powered analytics. We don't just manage conferences \u2014 we make them smarter.", kw: "why choose benefits advantages platform", src: "index.html" },
+                { id: "30", cat: "Platform", q: "Is the platform secure?", a: "Absolutely. We maintain 99% uptime with secure payment gateways, data protection compliance, and role-based access controls. Security documentation is available on request.", kw: "security secure safe data privacy compliance", src: "index.html" },
+                { id: "31", cat: "Registration", q: "How do I register for a conference?", a: "Visit the conference page and click Register. Choose your tier (specialist, resident, or student), complete payment, and you'll receive your e-badge and confirmation instantly.", kw: "register conference delegate attendee how", src: "index.html" },
+                { id: "32", cat: "Demo", q: "How do I request a demo?", a: "Click 'Book Demo' on our website and fill in your details. Our team will schedule a personalized walkthrough tailored to your society's needs \u2014 usually within 48 hours.", kw: "demo request book trial show", src: "index.html" },
+                { id: "33", cat: "Testimonials", q: "What do your clients say?", a: "Our clients love the transformation. Dr. Sarah Mitchell says we've changed how they manage conferences. Prof. James Chen calls our registration seamless. And Ms. Victoria Rodriguez praises our analytics insights.", kw: "testimonials reviews clients feedback", src: "index.html" },
+                { id: "34", cat: "Pricing", q: "How much does the platform cost?", a: "Pricing is flexible based on your society's size, number of conferences, and the services you need. We recommend booking a demo for a tailored quote \u2014 there's no one-size-fits-all.", kw: "pricing cost price plans subscription", src: "index.html" },
+                { id: "35", cat: "Contact", q: "How can I contact you?", a: "You can reach us through the 'Book Demo' button on our website, email us at hello@numero.in, or use our support portal if you're an existing client.", kw: "contact email phone support reach", src: "index.html" },
+                { id: "36", cat: "CME", q: "What about CME credits?", a: "Our platform is fully CME-integrated. Conference websites track credit hours, and our membership module maintains a running tally of each doctor's CME progress for professional development.", kw: "CME credits continuing medical education", src: "index.html" },
+                { id: "37", cat: "Greetings", q: "Hello / Hi / Hey", a: "Hello! \ud83d\udc4b I'm the Numero AI assistant. I can help you with information about our services, analytics, conferences, and more. What would you like to know?", kw: "hello hi hey greetings welcome", src: "general" },
+                { id: "38", cat: "Greetings", q: "Thank you / Thanks", a: "You're welcome! If you have more questions, feel free to ask anytime. Have a wonderful day! \ud83d\ude0a", kw: "thanks thank you bye goodbye", src: "general" },
+                { id: "39", cat: "About Us", q: "What makes you different?", a: "Unlike generic event tools, we're built specifically for medical conferences. We understand peer review, CME compliance, specialty-level analytics, and the unique needs of medical societies.", kw: "different unique special competitive advantage", src: "general" },
+                { id: "40", cat: "About Us", q: "Do you work with international conferences?", a: "Currently, we're focused on India's medical conference ecosystem, but our platform is designed to scale. We've supported events with international speakers and are exploring global expansion.", kw: "international global overseas expand", src: "general" }
+            ];
+
+
+            // ── Stop Words ──
+            const SW = new Set(['the', 'is', 'at', 'which', 'on', 'a', 'an', 'and', 'or', 'but', 'in', 'to', 'for', 'of', 'with', 'it', 'this', 'that', 'be', 'are', 'was', 'were', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'shall', 'can', 'need', 'must', 'am', 'not', 'no', 'so', 'if', 'by', 'from', 'up', 'out', 'as', 'its', 'my', 'your', 'our', 'their', 'we', 'you', 'he', 'she', 'they', 'me', 'him', 'her', 'us', 'them', 'what', 'how', 'when', 'where', 'who', 'why', 'about', 'also', 'more', 'very', 'just', 'than', 'then', 'now', 'here', 'there', 'each', 'all', 'both', 'few', 'some', 'any', 'most', 'other', 'into', 'over', 'after', 'before', 'between', 'through']);
+
+            function tokenize(t) { return t.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter(w => w.length > 1 && !SW.has(w)); }
+
+            function buildIndex() {
+                cbVocab = {}; cbIDF = {}; let idx = 0; const df = {};
+                cbKB.forEach(e => {
+                    const tks = tokenize(e.q + ' ' + e.a + ' ' + e.kw), u = new Set(tks);
+                    tks.forEach(t => { if (!(t in cbVocab)) cbVocab[t] = idx++; });
+                    u.forEach(t => { df[t] = (df[t] || 0) + 1; });
+                });
+                const N = cbKB.length;
+                for (const t in df) cbIDF[t] = Math.log((N + 1) / (df[t] + 1)) + 1;
+                cbVectors = cbKB.map(e => {
+                    const tks = tokenize(e.q + ' ' + e.a + ' ' + e.kw), tf = {};
+                    tks.forEach(t => { tf[t] = (tf[t] || 0) + 1; });
+                    const mx = Math.max(...Object.values(tf), 1), v = {};
+                    for (const t in tf) { if (t in cbVocab) v[cbVocab[t]] = (0.5 + 0.5 * (tf[t] / mx)) * (cbIDF[t] || 1); }
+                    return v;
+                });
+            }
+
+            function cosine(a, b) {
+                let d = 0, ma = 0, mb = 0;
+                for (const k in a) { ma += a[k] * a[k]; if (k in b) d += a[k] * b[k]; }
+                for (const k in b) mb += b[k] * b[k];
+                ma = Math.sqrt(ma); mb = Math.sqrt(mb);
+                return (ma && mb) ? d / (ma * mb) : 0;
+            }
+
+            function retrieve(query, topK = 3) {
+                const tks = tokenize(query), tf = {};
+                tks.forEach(t => { tf[t] = (tf[t] || 0) + 1; });
+                const mx = Math.max(...Object.values(tf), 1), qv = {};
+                for (const t in tf) { if (t in cbVocab) qv[cbVocab[t]] = (0.5 + 0.5 * (tf[t] / mx)) * (cbIDF[t] || 1); }
+                const scores = cbVectors.map((v, i) => ({ i, s: cosine(qv, v) })).sort((a, b) => b.s - a.s);
+                return scores.slice(0, topK).filter(x => x.s > 0.05).map(x => ({ ...cbKB[x.i], score: x.s }));
+            }
+
+            function genResponse(q, ctx) {
+                if (!ctx.length) return { text: "I don't have specific information about that. Try asking about our <strong>services</strong>, <strong>analytics</strong>, <strong>conferences</strong>, or <strong>abstract management</strong>.", src: null, cat: null };
+                let ans = ctx[0].a;
+                if (ctx.length > 1 && ctx[1].score > 0.2 && ctx[1].cat !== ctx[0].cat)
+                    ans += '\n\n<strong>Related:</strong> ' + ctx[1].a.substring(0, 140) + '...';
+                return { text: fmt(ans), src: ctx[0].src, cat: ctx[0].cat };
+            }
+
+            function fmt(t) {
+                t = t.replace(/\((\d+)\)\s*/g, '<br/><strong>$1.</strong> ');
+                t = t.replace(/(\d+\.?\d*%)/g, '<strong>$1</strong>');
+                t = t.replace(/([+\-]\d+\.?\d*%)/g, '<strong>$1</strong>');
+                t = t.replace(/\n\n/g, '<br/><br/>');
+                return t;
+            }
+
+            const catIcons = { Services: '\ud83c\udfe5', Platform: '\ud83d\udcbb', Analytics: '\ud83d\udcca', Conference: '\ud83c\udfaf', Abstracts: '\ud83d\udcc4', 'Room Mapping': '\ud83c\udfe8', 'Follow-up': '\ud83d\udccb', Insights: '\u26a1', Historical: '\ud83d\udcc8', Registration: '\u270d\ufe0f', Demo: '\ud83c\udfac', Testimonials: '\ud83d\udcac', Specialty: '\ud83e\uddec', Participants: '\ud83d\udc65', Greetings: '\ud83d\udc4b', Pricing: '\ud83d\udcb0', Contact: '\ud83d\udcde', Security: '\ud83d\udd12', CME: '\ud83c\udf93' };
+
+            // ── State ──
+            let userName = '';
+
+            // ── DOM ──
+            const fab = document.getElementById('chatbot-fab');
+            const panel = document.getElementById('chatbot-panel');
+            const welcome = document.getElementById('cbWelcome');
+            const msgs = document.getElementById('cbMessages');
+            const typing = document.getElementById('cbTyping');
+            const suggestions = document.getElementById('cbSuggestions');
+            const input = document.getElementById('cbInput');
+            const sendBtn = document.getElementById('cbSend');
+            const nameInput = document.getElementById('cbNameInput');
+            const nameBtn = document.getElementById('cbNameBtn');
+
+            // Toggle
+            fab.addEventListener('click', () => {
+                const isOpen = panel.classList.toggle('open');
+                fab.classList.toggle('open');
+                if (isOpen) {
+                    if (!userName) nameInput.focus();
+                    else input.focus();
+                }
+            });
+
+            // ── Name submission ──
+            function submitName() {
+                const name = nameInput.value.trim();
+                if (!name) return;
+                userName = name;
+                welcome.style.display = 'none';
+                msgs.style.display = 'flex';
+
+                // Determine time-based greeting
+                const hr = new Date().getHours();
+                let greet = 'Hello';
+                if (hr < 12) greet = 'Good morning';
+                else if (hr < 17) greet = 'Good afternoon';
+                else greet = 'Good evening';
+
+                const welcomeMsg = `${greet}, <strong>${userName}</strong>! \ud83d\udc4b Welcome to our AI Assistant.`
+                    + `<br/><br/>I\u2019m here to help you with anything about our medical conference platform \u2014 services, analytics, conferences, abstract management, and more.`
+                    + `<br/><br/>Feel free to ask a question or pick a quick topic below!`;
+
+                addMsg(welcomeMsg, 'bot');
+
+                // Show initial suggestion chips
+                suggestions.innerHTML = [
+                    'What services do you offer?',
+                    'How does analytics work?',
+                    'Upcoming conferences?',
+                    'Abstract management'
+                ].map(q => '<button class="cb-chip" onclick="cbAsk(this)">' + q + '</button>').join('');
+
+                input.focus();
+            }
+
+            nameBtn.addEventListener('click', submitName);
+            nameInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); submitName(); }
+            });
+
+            const clearBtn = document.getElementById('cbClear');
+            if(clearBtn){
+                clearBtn.addEventListener('click', () => {
+                    msgs.innerHTML = '';
+                    userName = '';
+                    nameInput.value = '';
+                    msgs.style.display = 'none';
+                    welcome.style.display = 'flex';
+                    suggestions.innerHTML = '';
+                    nameInput.focus();
+                });
+                clearBtn.addEventListener('mouseover', () => clearBtn.style.opacity = '1');
+                clearBtn.addEventListener('mouseout', () => clearBtn.style.opacity = '0.8');
+            }
+
+            function timeStr() {
+                return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            function addMsg(text, sender) {
+                welcome.style.display = 'none'; msgs.style.display = 'flex';
+                const row = document.createElement('div');
+                row.className = 'cb-msg-row ' + sender;
+                const av = document.createElement('div');
+                av.className = 'cb-msg-avatar';
+                av.textContent = sender === 'bot' ? '\ud83e\udd16' : '\ud83d\udc64';
+                const wrap = document.createElement('div');
+                const bub = document.createElement('div');
+                bub.className = 'cb-msg-bubble'; bub.innerHTML = text;
+                wrap.appendChild(bub);
+                const tm = document.createElement('div');
+                tm.className = 'cb-msg-time'; tm.textContent = timeStr();
+                wrap.appendChild(tm);
+                row.appendChild(av); row.appendChild(wrap);
+                msgs.appendChild(row);
+                msgs.scrollTop = msgs.scrollHeight;
+            }
+
+            function updateChips(ctx) {
+                const chips = []; const used = new Set();
+                if (ctx.length) {
+                    const c = ctx[0].cat;
+                    cbKB.forEach(e => { if (e.cat === c && !used.has(e.id) && e.id !== ctx[0].id) { chips.push(e.q); used.add(e.id); } });
+                }
+                while (chips.length < 4) {
+                    const r = cbKB[Math.floor(Math.random() * cbKB.length)];
+                    if (!used.has(r.id) && r.cat !== 'Greetings') { chips.push(r.q); used.add(r.id); }
+                }
+                suggestions.innerHTML = chips.slice(0, 4).map(q => '<button class="cb-chip" onclick="cbAsk(this)">' + q + '</button>').join('');
+            }
+
+            async function send(text) {
+                if (cbBusy || !text.trim()) return;
+                // If name not set yet, treat input as name
+                if (!userName) {
+                    nameInput.value = text;
+                    submitName();
+                    return;
+                }
+                cbBusy = true;
+                const q = text.trim();
+                addMsg(q, 'user'); input.value = '';
+                typing.classList.add('active');
+                msgs.scrollTop = msgs.scrollHeight;
+                await new Promise(r => setTimeout(r, 500 + Math.random() * 600));
+                const ctx = retrieve(q);
+                const res = genResponse(q, ctx);
+                typing.classList.remove('active');
+                addMsg(res.text, 'bot');
+                updateChips(ctx);
+                cbBusy = false;
+            }
+
+            // Global for onclick
+            window.cbAsk = function (el) { const t = el.textContent; input.value = t; send(t); };
+
+            sendBtn.addEventListener('click', () => send(input.value));
+            input.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input.value); } });
+
+            // Init — local KB only (no Google Drive)
+            cbKB = KB_DATA.map(e => ({ id: e.id, cat: e.cat, q: e.q, a: e.a, kw: e.kw, src: e.src }));
+            buildIndex();
+        })();
+    </script>
 </body>
+
 </html>
