@@ -171,21 +171,18 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   overflow: hidden;
 }
 
-/* ─ hero photo ─ */
-.h-photo {
+/* ─ hero shader canvas ─ */
+#hero-shader {
   position: absolute; inset: 0; z-index: 0;
-  background:
-    url('https://images.unsplash.com/photo-1588776814546-1ffbb172d4de?auto=format&fit=crop&w=1920&q=85')
-    center 30% / cover no-repeat;
+  width: 100%; height: 100%;
+  display: block;
 }
-/* multi-layer overlay: dark base + teal-left + gold-right accent */
-.h-photo::after {
-  content: '';
-  position: absolute; inset: 0;
+/* subtle dark vignette over the shader so text stays readable */
+#hero-shader-overlay {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(to right, rgba(2,13,30,.97) 0%, rgba(2,13,30,.7) 45%, rgba(2,13,30,.88) 100%),
-    linear-gradient(160deg, rgba(0,194,203,.18) 0%, transparent 45%),
-    linear-gradient(200deg, rgba(245,158,11,.12) 0%, transparent 40%);
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(2,13,30,.3) 0%, rgba(2,13,30,.58) 100%),
+    linear-gradient(to bottom, rgba(2,13,30,.25) 0%, rgba(2,13,30,.08) 40%, rgba(2,13,30,.5) 100%);
 }
 
 /* ─ animated gradient orbs ─ */
@@ -818,7 +815,8 @@ footer {
 
 <!-- ══ HERO ══════════════════════════════════════════ -->
 <section id="hero">
-  <div class="h-photo"></div>
+  <canvas id="hero-shader"></canvas>
+  <div id="hero-shader-overlay"></div>
   <div class="h-orb h-orb-1"></div>
   <div class="h-orb h-orb-2"></div>
   <div class="h-orb h-orb-3"></div>
@@ -1495,6 +1493,221 @@ document.addEventListener('keydown', e => e.key==='Escape' && closeModal());
   // Init
   cbKB=KB_DATA.map(e=>({id:e.id,cat:e.cat,q:e.q,a:e.a,kw:e.kw,src:e.src}));
   buildIndex();
+}());
+</script>
+
+<!-- ══ HERO ECG DYNAMIC ══════════════════════════════════════ -->
+<script>
+(function(){
+  const canvas = document.getElementById('hero-shader');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    const hero = document.getElementById('hero');
+    canvas.width  = hero.offsetWidth  || window.innerWidth;
+    canvas.height = hero.offsetHeight || window.innerHeight;
+    // re-init trail buffers on resize
+    LINES.forEach(l => { l.trail = []; l.headX = 0; });
+  }
+  window.addEventListener('resize', resize);
+
+  /* ── Authentic ECG waveform ── */
+  function ecg(p) {
+    p = ((p % 1) + 1) % 1;
+    if (p < 0.04) return 0;
+    if (p < 0.13) return Math.sin((p - 0.04) / 0.09 * Math.PI) * 0.13;   // P
+    if (p < 0.21) return 0;                                                  // PR
+    if (p < 0.25) return -((p - 0.21) / 0.04) * 0.22;                      // Q
+    if (p < 0.285){ const t=(p-0.25)/0.035; return -0.22 + t * 1.22; }     // R up
+    if (p < 0.32) { const t=(p-0.285)/0.035; return 1.0 - t * 1.28; }      // S down
+    if (p < 0.39) { const t=(p-0.32)/0.07; return -0.28 + t * 0.28; }      // ST
+    if (p < 0.57) return Math.sin((p - 0.39) / 0.18 * Math.PI) * 0.30;    // T
+    return 0;
+  }
+
+  /* ── Lines: each is a "scan head" drawing in real-time ── */
+  const LINES = [
+    { yFrac:0.18, speed:95,  amp:34, baseAlpha:0.22, width:1.3, period:280, phase:0.0,  trail:[], headX:0 },
+    { yFrac:0.36, speed:118, amp:64, baseAlpha:0.42, width:2.2, period:320, phase:0.4,  trail:[], headX:0 },
+    { yFrac:0.54, speed:100, amp:54, baseAlpha:0.34, width:1.7, period:300, phase:0.72, trail:[], headX:0 },
+    { yFrac:0.70, speed:85,  amp:40, baseAlpha:0.24, width:1.4, period:290, phase:0.2,  trail:[], headX:0 },
+    { yFrac:0.85, speed:108, amp:30, baseAlpha:0.18, width:1.2, period:270, phase:0.6,  trail:[], headX:0 },
+  ];
+
+  /* ── Monitor grid ── */
+  function drawGrid(w, h) {
+    const cell = 48;
+    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(0,194,203,0.035)';
+    ctx.beginPath();
+    for(let x=0;x<w;x+=cell){ctx.moveTo(x,0);ctx.lineTo(x,h);}
+    for(let y=0;y<h;y+=cell){ctx.moveTo(0,y);ctx.lineTo(w,y);}
+    ctx.stroke();
+    ctx.lineWidth = 0.8;
+    ctx.strokeStyle = 'rgba(0,194,203,0.065)';
+    ctx.beginPath();
+    for(let x=0;x<w;x+=cell*5){ctx.moveTo(x,0);ctx.lineTo(x,h);}
+    for(let y=0;y<h;y+=cell*5){ctx.moveTo(0,y);ctx.lineTo(w,y);}
+    ctx.stroke();
+  }
+
+  /* ── Pulse flash state ── */
+  let flashAlpha = 0;
+
+  const STEP = 3;  // px advanced per frame per line (varies by speed)
+  const t0 = Date.now();
+  let lastTime = t0;
+
+  resize();
+
+  function render() {
+    const now = Date.now();
+    const dt  = Math.min((now - lastTime) / 1000, 0.05); // seconds, capped
+    lastTime  = now;
+    const elapsed = (now - t0) / 1000;
+
+    const w = canvas.width, h = canvas.height;
+
+    /* ── Background ── */
+    ctx.clearRect(0, 0, w, h);
+    const bg = ctx.createLinearGradient(0, 0, w, h);
+    bg.addColorStop(0, '#020d1e');
+    bg.addColorStop(1, '#051428');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    /* ── Pulse flash (whole-canvas teal wash on R-spike) ── */
+    flashAlpha *= 0.88; // decay
+    if (flashAlpha > 0.003) {
+      ctx.fillStyle = `rgba(0,194,203,${flashAlpha * 0.06})`;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    drawGrid(w, h);
+
+    LINES.forEach((line, li) => {
+      const cy = h * line.yFrac;
+      const pxPerSec = line.speed;
+
+      /* advance head */
+      line.headX += pxPerSec * dt;
+      if (line.headX > w) {
+        line.headX -= w;
+        line.trail = [];  // clear trail on wrap-around
+      }
+      const hx = line.headX;
+
+      /* sample ECG value at head */
+      const ecgPhase = (hx / line.period) + line.phase;
+      const ecgVal   = ecg(ecgPhase);
+
+      // detect R-spike for flash (primary line only)
+      if (li === 1 && ecgVal > 0.85) flashAlpha = Math.min(flashAlpha + 0.9, 1.0);
+
+      /* push point to trail */
+      const hy = cy - ecgVal * line.amp;
+      line.trail.push({ x: hx, y: hy });
+
+      /* trim trail to one full screen width */
+      while (line.trail.length > 0 && line.trail[0].x < hx - w * 0.98) {
+        line.trail.shift();
+      }
+
+      if (line.trail.length < 2) return;
+
+      ctx.save();
+
+      /* ── Draw trail with fading opacity gradient ── */
+      const trailLen = line.trail.length;
+      const segCount = Math.max(1, Math.floor(trailLen / 6));
+
+      for (let s = 0; s < segCount; s++) {
+        const startIdx = Math.floor((s / segCount) * trailLen);
+        const endIdx   = Math.min(Math.floor(((s + 1) / segCount) * trailLen), trailLen - 1);
+        if (startIdx >= endIdx) continue;
+
+        const ageFrac  = s / segCount;  // 0 = oldest, 1 = newest
+        const alpha    = line.baseAlpha * Math.pow(ageFrac, 1.8);
+        const glow     = alpha * 3.5;
+
+        ctx.beginPath();
+        ctx.moveTo(line.trail[startIdx].x, line.trail[startIdx].y);
+        for (let i = startIdx + 1; i <= endIdx; i++) {
+          ctx.lineTo(line.trail[i].x, line.trail[i].y);
+        }
+
+        ctx.shadowColor = `rgba(0,210,220,${glow})`;
+        ctx.shadowBlur  = 18;
+        ctx.strokeStyle = `rgba(0,220,230,${alpha})`;
+        ctx.lineWidth   = line.width;
+        ctx.lineJoin    = 'round';
+        ctx.lineCap     = 'round';
+        ctx.stroke();
+
+        // bright core
+        ctx.shadowBlur  = 5;
+        ctx.strokeStyle = `rgba(200,250,255,${alpha * 0.55})`;
+        ctx.lineWidth   = line.width * 0.35;
+        ctx.stroke();
+      }
+
+      /* ── Scan-head cursor: bright glowing dot ── */
+      const dotAlpha = Math.min(line.baseAlpha * 4.5, 1.0);
+      ctx.shadowColor = `rgba(0,230,240,${dotAlpha})`;
+      ctx.shadowBlur  = 28;
+      ctx.fillStyle   = `rgba(180,250,255,${dotAlpha})`;
+      ctx.beginPath();
+      ctx.arc(hx, hy, line.width * 1.6, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* ── Vertical scan-line at head ── */
+      const scanGrad = ctx.createLinearGradient(hx, cy - line.amp * 1.5, hx, cy + line.amp * 1.5);
+      scanGrad.addColorStop(0,   'rgba(0,194,203,0)');
+      scanGrad.addColorStop(0.5, `rgba(0,194,203,${line.baseAlpha * 0.7})`);
+      scanGrad.addColorStop(1,   'rgba(0,194,203,0)');
+      ctx.shadowBlur  = 0;
+      ctx.strokeStyle = scanGrad;
+      ctx.lineWidth   = 1;
+      ctx.beginPath();
+      ctx.moveTo(hx, cy - line.amp * 1.5);
+      ctx.lineTo(hx, cy + line.amp * 1.5);
+      ctx.stroke();
+
+      ctx.restore();
+    });
+
+    /* ── Erase ahead of scan head (blank zone, like a real monitor) ── */
+    LINES.forEach(line => {
+      const eraseW = 48;
+      const ex = (line.headX + 2) % canvas.width;
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      const eg = ctx.createLinearGradient(ex, 0, ex + eraseW, 0);
+      eg.addColorStop(0, 'rgba(0,0,0,0.85)');
+      eg.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = eg;
+      // Only erase a band around this line's y
+      const cy = canvas.height * line.yFrac;
+      ctx.fillRect(ex, cy - line.amp * 2, eraseW, line.amp * 4);
+      ctx.restore();
+    });
+
+    /* ── Side vignettes ── */
+    const fadeW = w * 0.12;
+    const fadeL = ctx.createLinearGradient(0, 0, fadeW, 0);
+    fadeL.addColorStop(0, 'rgba(2,13,30,0.95)');
+    fadeL.addColorStop(1, 'rgba(2,13,30,0)');
+    const fadeR = ctx.createLinearGradient(w - fadeW, 0, w, 0);
+    fadeR.addColorStop(0, 'rgba(2,13,30,0)');
+    fadeR.addColorStop(1, 'rgba(2,13,30,0.95)');
+    ctx.fillStyle = fadeL; ctx.fillRect(0, 0, fadeW, h);
+    ctx.fillStyle = fadeR; ctx.fillRect(w - fadeW, 0, fadeW, h);
+
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
 }());
 </script>
 </body>
