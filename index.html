@@ -141,6 +141,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: padding .3s, background .3s;
 }
 #nav.s { padding: .75rem 2rem; background: rgba(2,13,30,.88); }
+.nav-ul {
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
 .logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.55rem; letter-spacing: .1em;
@@ -810,7 +813,10 @@ footer {
     <li><a href="#about">About</a></li>
     <li><a href="#testi">Testimonials</a></li>
   </ul>
-  <button class="btn btn-gold" onclick="openModal()" style="font-size:.75rem;padding:.55rem 1.3rem;">Book Demo</button>
+  <div style="display:flex;align-items:center;gap:.6rem;">
+    <a href="#" onclick="return false;" class="btn btn-outline" style="font-size:.75rem;padding:.55rem 1.3rem;">Log In</a>
+    <button class="btn btn-gold" onclick="openModal()" style="font-size:.75rem;padding:.55rem 1.3rem;">Book Demo</button>
+  </div>
 </nav>
 
 <!-- ══ HERO ══════════════════════════════════════════ -->
@@ -933,7 +939,7 @@ footer {
 
       <div class="svc rv d2">
         <div class="svc-photo">
-          <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=600&q=80" alt="Membership"/>
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" alt="Membership"/>
         </div>
         <div class="svc-body">
           <div class="svc-chip">👥</div>
@@ -959,7 +965,708 @@ footer {
   </div>
 </section>
 
-<!-- ══ ABOUT ══════════════════════════════════════════ -->
+<!-- ══ PLATFORM DEMO ══════════════════════════════════════ -->
+<section id="platform-demo" class="sec" style="background:var(--ink);padding:5rem 0 6rem;">
+  <div class="wrap">
+    <div class="tc rv" style="margin-bottom:2.2rem;">
+      <div class="eyebrow">See It In Action</div>
+      <h2 class="heading">Your Dashboard, <span class="hl">Alive</span></h2>
+      <p class="sub">A live look at the analytics and tools powering India's leading medical societies — all in one platform.</p>
+    </div>
+
+    <!-- Toggle -->
+    <div style="display:flex;justify-content:center;margin-bottom:1.8rem;">
+      <div style="display:inline-flex;background:rgba(0,194,203,0.07);border:1px solid rgba(0,194,203,0.18);border-radius:50px;padding:4px;">
+        <button id="toggle-doctor" onclick="switchDemo('doctor')" style="padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-d) 100%);color:var(--ink);box-shadow:0 4px 16px rgba(0,194,203,.35);">🩺 Doctor View</button>
+        <button id="toggle-organizer" onclick="switchDemo('organizer')" style="padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:transparent;color:rgba(240,246,255,.55);">🗂️ Organizer View</button>
+      </div>
+    </div>
+
+    <!-- Player shell -->
+    <div id="demo-player" class="rv" style="position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(0,194,203,.22);box-shadow:0 0 0 1px rgba(0,194,203,.08),0 32px 80px rgba(0,0,0,.6),0 0 60px rgba(0,194,203,.08);background:#0a1628;">
+      <!-- Chrome -->
+      <div style="background:rgba(5,15,35,.95);border-bottom:1px solid rgba(0,194,203,.14);padding:.55rem 1.1rem;display:flex;align-items:center;gap:.7rem;">
+        <span style="width:11px;height:11px;border-radius:50%;background:#FF5F57;display:inline-block;"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#FEBC2E;display:inline-block;"></span>
+        <span style="width:11px;height:11px;border-radius:50%;background:#28C840;display:inline-block;"></span>
+        <div id="demo-url" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(0,194,203,.12);border-radius:6px;padding:.28rem 1rem;margin:0 1rem;font-size:.7rem;color:rgba(240,246,255,.4);font-family:'Inter',sans-serif;display:flex;align-items:center;gap:.4rem;"><span style="color:rgba(0,194,203,.5);">🔒</span>&nbsp;app.medsociety.health/doctor</div>
+        <div id="demo-badge" style="font-size:.65rem;color:rgba(0,194,203,.6);font-family:'Inter',sans-serif;letter-spacing:.05em;">DOCTOR ANALYTICS</div>
+      </div>
+      <!-- Canvases -->
+      <canvas id="demoCanvas" style="display:block;width:100%;"></canvas>
+      <canvas id="demoCanvasOrg" style="display:none;width:100%;"></canvas>
+      <!-- Overlay -->
+      <div id="demo-overlay" style="position:absolute;inset:0;top:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(2,13,30,.72);backdrop-filter:blur(4px);cursor:pointer;transition:opacity .4s;" onclick="startActiveDemo()">
+        <div style="width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-d) 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(0,194,203,.5);font-size:1.6rem;padding-left:4px;">&#9654;</div>
+        <p style="margin-top:1.1rem;font-size:.85rem;color:rgba(240,246,255,.7);letter-spacing:.06em;text-transform:uppercase;">Watch Platform Demo</p>
+      </div>
+      <!-- Controls -->
+      <div id="demo-controls" style="display:none;position:absolute;bottom:0;left:0;right:0;padding:.6rem 1.2rem .8rem;background:linear-gradient(to top,rgba(2,13,30,.95),transparent);">
+        <div style="display:flex;align-items:center;gap:.9rem;margin-bottom:.45rem;">
+          <span id="demo-scene-label" style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-family:'Inter',sans-serif;font-weight:600;flex:1;"></span>
+          <span id="demo-timer" style="font-size:.65rem;color:rgba(240,246,255,.4);font-family:'Inter',sans-serif;"></span>
+        </div>
+        <div style="background:rgba(255,255,255,.1);border-radius:4px;height:3px;overflow:hidden;">
+          <div id="demo-progress" style="height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));width:0%;transition:width .1s linear;border-radius:4px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dots -->
+    <div id="demo-dots" style="display:flex;justify-content:center;gap:.6rem;margin-top:1.4rem;">
+      <div class="demo-dot active" data-scene="0"></div>
+      <div class="demo-dot" data-scene="1"></div>
+      <div class="demo-dot" data-scene="2"></div>
+      <div class="demo-dot" data-scene="3"></div>
+      <div class="demo-dot" data-scene="4"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+.demo-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,194,203,.25);border:1px solid rgba(0,194,203,.3);transition:background .3s,transform .3s;cursor:pointer;}
+.demo-dot.active{background:var(--teal);transform:scale(1.3);}
+</style>
+
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   SHARED DEMO ENGINE — Doctor + Organizer
+══════════════════════════════════════════════════════════ */
+(function(){
+
+  const DPR=window.devicePixelRatio||1, W=1060, H=520;
+
+  const C={
+    bg:'#071428',bg2:'#0b1c38',card:'rgba(11,28,56,0.97)',
+    teal:'#00C2CB',gold:'#F59E0B',rose:'#FF6B8A',
+    purple:'#9B7FFF',green:'#4ECBA5',blue:'#4B9EFF',
+    amber:'#F5A623',jade:'#3EC9A7',coral:'#FF5F75',sky:'#5BA4F5',lilac:'#A78BFA',
+    white:'#F0F6FF',muted:'rgba(240,246,255,0.42)',border:'rgba(0,194,203,0.16)',
+  };
+
+  function setupCanvas(id){
+    const c=document.getElementById(id);
+    c.width=W*DPR; c.height=H*DPR; c.style.width=W+'px'; c.style.height=H+'px';
+    const ctx=c.getContext('2d'); ctx.scale(DPR,DPR); return {c,ctx};
+  }
+  const doc=setupCanvas('demoCanvas');
+  const org=setupCanvas('demoCanvasOrg');
+
+  function makeDrawer(ctx){
+    function rect(x,y,w,h,r,fill,stroke){
+      if(w<=0||h<=0)return;
+      ctx.save(); ctx.beginPath(); ctx.roundRect(x,y,w,h,r||0);
+      if(fill){ctx.fillStyle=fill;ctx.fill();}
+      if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1;ctx.stroke();}
+      ctx.restore();
+    }
+    function txt(s,x,y,sz,col,wt,al,mw){
+      ctx.save(); ctx.font=`${wt||400} ${sz}px Inter,sans-serif`;
+      ctx.fillStyle=col; ctx.textAlign=al||'left';
+      mw?ctx.fillText(String(s),x,y,mw):ctx.fillText(String(s),x,y);
+      ctx.restore();
+    }
+    function pbar(x,y,w,h,col,pct,r){
+      rect(x,y,w,h,r||3,'rgba(255,255,255,0.06)');
+      if(pct>0)rect(x,y,Math.max(4,w*Math.min(pct,1)),h,r||3,col);
+    }
+    function easeOut(t){return 1-Math.pow(Math.max(0,Math.min(1,1-t)),3);}
+    function drawBg(){
+      rect(0,0,W,H,0,C.bg);
+      ctx.save(); ctx.fillStyle='rgba(0,194,203,0.04)';
+      for(let x=20;x<W;x+=40)for(let y=20;y<H;y+=40){ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill();}
+      ctx.restore();
+    }
+    function pill(label,col,p,thresh){
+      if(p<=thresh)return;
+      const a=easeOut((p-thresh)/(1-thresh));
+      ctx.save(); ctx.globalAlpha=a;
+      const pw=260,ph=28,px=W/2-pw/2,py=H-40;
+      rect(px,py,pw,ph,8,col+'22',col);
+      txt(label,W/2,py+18,11,col,600,'center');
+      ctx.restore();
+    }
+    return{rect,txt,pbar,easeOut,drawBg,pill};
+  }
+
+  /* ══════════════════════════════════
+     DOCTOR SCENES
+  ══════════════════════════════════ */
+  (function(){
+    const{rect,txt,pbar,easeOut,drawBg,pill}=makeDrawer(doc.ctx);
+    const ctx=doc.ctx, HDR=46;
+
+    function header(tab){
+      rect(0,0,W,HDR,0,C.bg2);
+      ctx.save();ctx.strokeStyle=C.border;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,HDR);ctx.lineTo(W,HDR);ctx.stroke();ctx.restore();
+      ['Overview','Conferences','Abstracts','Members'].forEach((t,i)=>{
+        const active=i===(tab||0),tx=20+i*102;
+        rect(tx,9,96,28,14,active?'rgba(0,194,203,0.15)':'transparent',active?C.teal:'rgba(0,194,203,0.1)');
+        txt(t,tx+48,28,11,active?C.teal:C.muted,600,'center');
+      });
+      rect(W-170,12,58,22,11,'rgba(0,194,203,0.1)',C.teal);
+      txt('● LIVE',W-141,27,10,C.teal,700,'center');
+      txt('Updated just now',W-14,27,10,C.muted,400,'right');
+    }
+
+    /* S0 – KPI */
+    function s0(p){
+      drawBg();header(0);
+      const kpis=[
+        {icon:'🏛️',val:500,suf:'+',label:'Conferences Hosted',col:C.teal},
+        {icon:'👥',val:250,suf:'K',label:'Delegates Served',col:C.purple},
+        {icon:'📄',val:198,suf:'',label:'Abstracts Reviewed',col:C.gold},
+        {icon:'⭐',val:4.9,suf:'/5',label:'Avg Rating',col:C.green},
+        {icon:'💰',val:12,suf:'Cr',label:'Revenue Processed',col:C.rose},
+        {icon:'🏥',val:48,suf:'',label:'Partner Societies',col:C.blue},
+      ];
+      const cols=3,cw=Math.floor((W-32-cols*10)/cols),ch=108,sy=HDR+12;
+      kpis.forEach((k,i)=>{
+        const row=Math.floor(i/cols),col=i%cols;
+        const ep=easeOut(Math.max(0,(p-i*0.07)/(1-i*0.05)));
+        const x=16+col*(cw+10),y=sy+row*(ch+10);
+        ctx.save();ctx.globalAlpha=ep;ctx.translate(0,(1-ep)*14);
+        rect(x,y,cw,ch,10,C.card,C.border);
+        rect(x,y,cw,3,[10,10,0,0],k.col);
+        txt(k.icon,x+14,y+30,18,k.col);
+        const nv=typeof k.val==='number'?(Number.isInteger(k.val)?Math.round(k.val*ep):(k.val*ep).toFixed(1)):k.val;
+        txt(nv+k.suf,x+14,y+76,26,C.white,700,'left',cw-20);
+        txt(k.label,x+14,y+96,10,C.muted,500,'left',cw-20);
+        ctx.restore();
+      });
+      pill('📊  Real-time KPI Dashboard',C.teal,p,0.65);
+    }
+
+    /* S1 – Charts */
+    function s1(p){
+      drawBg();header(2);
+      const lx=16,ly=HDR+12,lw=Math.floor(W*0.58)-22,lh=H-HDR-60;
+      rect(lx,ly,lw,lh,10,C.card,C.border);
+      txt('Abstracts by Specialty',lx+14,ly+24,13,C.white,700,'left',lw-20);
+      txt('Year-to-date submissions',lx+14,ly+40,10,C.muted);
+      const specs=[
+        {name:'Cardiology',val:68,col:C.rose},{name:'Neurology',val:47,col:C.blue},
+        {name:'Oncology',val:41,col:C.purple},{name:'Genomics',val:22,col:C.teal},
+        {name:'Surgery',val:18,col:C.gold},
+      ];
+      const chartB=ly+lh-32,chartH=lh-90,bW=34;
+      const totalBW=specs.length*bW+(specs.length-1)*14;
+      const bSX=lx+(lw-totalBW)/2;
+      specs.forEach((s,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.1)/(1-i*0.06)));
+        const bx=bSX+i*(bW+14),bH=Math.max(0,(s.val/70)*chartH*ep),by=chartB-bH;
+        ctx.save();ctx.shadowColor=s.col;ctx.shadowBlur=8*ep;
+        rect(bx,by,bW,bH,4,s.col);ctx.restore();
+        if(ep>0.35&&bH>18)txt(Math.round(s.val*ep),bx+bW/2,by-5,10,s.col,700,'center');
+        txt(s.name,bx+bW/2,chartB+14,9,C.muted,500,'center');
+      });
+      const dx=lx+lw+10,dy=HDR+12,dw=W-dx-16,dh=lh;
+      rect(dx,dy,dw,dh,10,C.card,C.border);
+      txt('Submission Status',dx+14,dy+24,13,C.white,700,'left',dw-20);
+      const cx2=dx+dw/2,cy2=dy+dh*0.45,dr=Math.min(dw,dh)*0.26;
+      const slices=[{pct:.61,col:C.green,l:'Accepted',n:121},{pct:.22,col:C.rose,l:'Rejected',n:44},{pct:.17,col:C.gold,l:'Pending',n:33}];
+      let ang=-Math.PI/2,drawn=0,sw0=easeOut(Math.min(p/0.85,1))*2*Math.PI;
+      slices.forEach(s=>{
+        const sw=Math.min(s.pct*2*Math.PI,sw0-drawn);if(sw<=0)return;
+        ctx.save();ctx.shadowColor=s.col;ctx.shadowBlur=10;
+        ctx.beginPath();ctx.moveTo(cx2,cy2);ctx.arc(cx2,cy2,dr,ang,ang+sw);
+        ctx.closePath();ctx.fillStyle=s.col;ctx.fill();ctx.restore();
+        ang+=s.pct*2*Math.PI;drawn+=s.pct*2*Math.PI;
+      });
+      rect(cx2-dr*.62,cy2-dr*.62,dr*1.24,dr*1.24,dr*.62,C.card);
+      txt('198',cx2,cy2+7,18,C.white,700,'center');
+      txt('total',cx2,cy2+22,9,C.muted,400,'center');
+      const legY=dy+dh-60;
+      slices.forEach((s,i)=>{
+        if(p<0.4)return;
+        ctx.save();ctx.globalAlpha=easeOut((p-0.4)/0.6);
+        rect(dx+14,legY+i*19-8,10,10,3,s.col);
+        txt(s.l,dx+30,legY+i*19+1,10,C.muted,400,'left',dw-80);
+        txt(s.n,dx+dw-14,legY+i*19+1,10,s.col,700,'right');
+        ctx.restore();
+      });
+      pill('📈  Charts & Specialty Analytics',C.gold,p,0.7);
+    }
+
+    /* S2 – Conference cards */
+    function s2(p){
+      drawBg();header(1);
+      const confs=[
+        {name:'IndoMed Cardiology Summit 2026',date:'Sep 12–14',loc:'Mumbai',days:185,slots:42,total:50,col:C.rose},
+        {name:'National Oncology Congress',date:'Oct 3–6',loc:'Delhi',days:206,slots:28,total:40,col:C.purple},
+        {name:'NeuroScience India Forum',date:'Nov 18–20',loc:'Bengaluru',days:252,slots:61,total:70,col:C.teal},
+        {name:'Pediatric Innovation Meet',date:'Dec 5–7',loc:'Chennai',days:269,slots:19,total:35,col:C.gold},
+      ];
+      const cw=Math.floor((W-42)/2),ch=Math.floor((H-HDR-52)/2);
+      confs.forEach((c,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.1)/(1-i*0.06)));
+        const row=Math.floor(i/2),col=i%2;
+        const cx=16+col*(cw+10),cy=HDR+12+row*(ch+10);
+        ctx.save();ctx.globalAlpha=ep;ctx.translate(0,(1-ep)*16);
+        rect(cx,cy,cw,ch,10,C.card,C.border);
+        rect(cx,cy,4,ch,[10,0,0,10],c.col);
+        txt(c.name,cx+14,cy+24,12,C.white,700,'left',cw-76);
+        txt('📅 '+c.date+'   📍 '+c.loc,cx+14,cy+42,10,C.muted,400,'left',cw-30);
+        const urgent=c.days<220,bx=cx+cw-66,by2=cy+12;
+        rect(bx,by2,58,22,11,urgent?'rgba(255,107,138,0.15)':'rgba(0,194,203,0.12)',urgent?C.rose:C.teal);
+        txt(c.days+'d left',bx+29,by2+15,9,urgent?C.rose:C.teal,700,'center');
+        txt('Abstract Slots',cx+14,cy+ch-54,10,C.muted,400,'left',90);
+        txt(c.slots+'/'+c.total,cx+cw-14,cy+ch-54,10,c.col,700,'right');
+        pbar(cx+14,cy+ch-42,cw-28,7,c.col,(c.slots/c.total)*ep,4);
+        rect(cx+14,cy+ch-30,cw-28,20,5,'rgba(255,255,255,0.03)');
+        txt('⏰ Submission window open',cx+22,cy+ch-15,9,C.muted,400,'left',cw-40);
+        ctx.restore();
+      });
+      pill('🏛️  Conference Timeline & Slot Tracker',C.purple,p,0.72);
+    }
+
+    /* S3 – Location table */
+    function s3(p){
+      drawBg();header(0);
+      const PAD=16;
+      rect(PAD,HDR+PAD,W-PAD*2,H-HDR-PAD*2-36,10,C.card,C.border);
+      txt('Top Conference Locations',PAD+14,HDR+PAD+26,13,C.white,700);
+      txt('Ranked by abstracts · conferences · attendance',PAD+14,HDR+PAD+44,10,C.muted);
+      const COL=[{l:'City',w:126},{l:'Conferences',w:112},{l:'Abstracts',w:100},{l:'Delegates',w:100},{l:'Top Specialty',w:132},{l:'Index',w:0}];
+      COL[COL.length-1].w=W-PAD*2-28-COL.slice(0,-1).reduce((s,c)=>s+c.w,0);
+      const tX=PAD+14,tY=HDR+PAD+54,rowH=46;
+      ctx.save();ctx.strokeStyle=C.border;ctx.lineWidth=0.8;
+      ctx.beginPath();ctx.moveTo(tX,tY+2);ctx.lineTo(W-PAD-14,tY+2);ctx.stroke();ctx.restore();
+      let hx=tX;COL.forEach(c=>{txt(c.l.toUpperCase(),hx,tY-2,8,C.muted,700);hx+=c.w;});
+      const rows=[
+        {city:'Mumbai',conf:14,abs:312,att:487,top:'Cardiology',col:C.rose,idx:100},
+        {city:'Delhi',conf:11,abs:247,att:412,top:'Oncology',col:C.purple,idx:79},
+        {city:'Bengaluru',conf:9,abs:198,att:356,top:'Genomics',col:C.teal,idx:63},
+        {city:'Chennai',conf:7,abs:164,att:298,top:'Neurology',col:C.blue,idx:53},
+        {city:'Hyderabad',conf:6,abs:142,att:267,top:'Immunology',col:C.gold,idx:46},
+        {city:'Kolkata',conf:5,abs:118,att:231,top:'Surgery',col:C.green,idx:38},
+      ];
+      rows.forEach((r,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.08)/(1-i*0.04)));
+        ctx.save();ctx.globalAlpha=ep;
+        const ry=tY+8+i*rowH;
+        if(i%2===0)rect(tX,ry,W-PAD*2-28,rowH,4,'rgba(0,194,203,0.025)');
+        let rx=tX;
+        txt(r.city,rx,ry+rowH/2+4,12,C.white,600,'left',COL[0].w-8);rx+=COL[0].w;
+        txt(r.conf,rx,ry+rowH/2+4,12,C.blue,600,'left',COL[1].w-8);rx+=COL[1].w;
+        txt(r.abs,rx,ry+rowH/2+4,12,C.teal,700,'left',COL[2].w-8);rx+=COL[2].w;
+        txt(r.att,rx,ry+rowH/2+4,12,C.white,400,'left',COL[3].w-8);rx+=COL[3].w;
+        rect(rx,ry+rowH/2-9,COL[4].w-16,20,9,'rgba(0,194,203,0.08)',r.col+'88');
+        txt(r.top,rx+(COL[4].w-16)/2,ry+rowH/2+4,9,r.col,600,'center');rx+=COL[4].w;
+        const bw=COL[5].w-20;
+        pbar(rx,ry+rowH/2-4,bw,8,r.col,r.idx/100*ep,4);
+        txt(r.idx,rx+bw+8,ry+rowH/2+4,9,r.col,700);
+        ctx.restore();
+      });
+      pill('🗺️  City-Level Geographic Analytics',C.blue,p,0.72);
+    }
+
+    /* S4 – AI + Health */
+    function s4(p){
+      drawBg();header(0);
+      const PAD=16,GAP=10,lw=Math.floor(W*0.56)-PAD,rw=W-PAD*2-lw-GAP;
+      const cY=HDR+PAD,cH=H-HDR-PAD*2-36;
+      rect(PAD,cY,lw,cH,10,C.card,C.border);
+      txt('AI-Powered Recommendations',PAD+14,cY+26,13,C.white,700,'left',lw-20);
+      txt('Smart insights from your platform data',PAD+14,cY+44,10,C.muted);
+      const actions=[
+        {icon:'🔴',text:'Cardiology Mumbai — 8 pending, deadline in 53 days',cta:'Notify Members',col:C.rose},
+        {icon:'🔴',text:'Neurology abstracts up 21% — allocate 2 extra reviewer slots',cta:'Assign Reviewers',col:C.rose},
+        {icon:'🟡',text:'Genomics +34% YoY — consider a dedicated summit track',cta:'Plan Track',col:C.gold},
+        {icon:'🟡',text:'Surgery declined 7% — outreach to 3 departments',cta:'Send Outreach',col:C.gold},
+        {icon:'🟢',text:'Kolkata venue underperforming — review co-host model',cta:'Review Venues',col:C.green},
+      ];
+      const iH=58,iSY=cY+56,iW=lw-20;
+      actions.forEach((a,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.09)/(1-i*0.05)));
+        ctx.save();ctx.globalAlpha=ep;
+        const ay=iSY+i*iH;
+        rect(PAD+10,ay,iW,iH-6,8,'rgba(255,255,255,0.025)',a.col+'33');
+        txt(a.icon,PAD+22,ay+22,13,a.col);
+        ctx.font='400 10px Inter,sans-serif';ctx.fillStyle=C.white;ctx.textAlign='left';
+        const words=a.text.split(' '),mw=iW-72;let line='',ly2=ay+20,lc=0;
+        words.forEach(w=>{
+          const t=line+(line?' ':'')+w;
+          if(lc<1&&ctx.measureText(t).width>mw){ctx.fillText(line,PAD+42,ly2,mw);line=w;ly2+=14;lc++;}
+          else line=t;
+        });ctx.fillText(line,PAD+42,ly2,mw);
+        const ctaW=92,ctaX=PAD+10+iW-ctaW-8,ctaY=ay+iH-22;
+        rect(ctaX,ctaY,ctaW,16,4,'rgba(0,194,203,0.1)',C.teal);
+        txt(a.cta+' →',ctaX+ctaW/2,ctaY+11,8,C.teal,600,'center');
+        ctx.restore();
+      });
+      const rx=PAD+lw+GAP;
+      rect(rx,cY,rw,cH,10,C.card,C.border);
+      txt('Platform Health',rx+14,cY+26,13,C.white,700,'left',rw-20);
+      txt('Live performance metrics',rx+14,cY+44,10,C.muted);
+      const metrics=[
+        {label:'Submission Rate',val:87,col:C.teal},{label:'Review Speed',val:74,col:C.green},
+        {label:'Delegate NPS',val:92,col:C.gold},{label:'CME Compliance',val:96,col:C.purple},
+        {label:'Renewal Rate',val:81,col:C.rose},
+      ];
+      const mSY=cY+62,mGap=(cH-72)/metrics.length;
+      metrics.forEach((m,i)=>{
+        const ep=easeOut(Math.max(0,(p-0.08-i*0.1)/(1-0.08-i*0.06)));
+        ctx.save();ctx.globalAlpha=ep;
+        const my=mSY+i*mGap;
+        txt(m.label,rx+14,my+12,10,C.muted,500,'left',rw-60);
+        txt(Math.round(m.val*ep)+'%',rx+rw-14,my+12,12,m.col,700,'right');
+        pbar(rx+14,my+18,rw-28,8,m.col,m.val/100*ep,4);
+        ctx.restore();
+      });
+      pill('✨  AI Insights · Platform Health',C.teal,p,0.72);
+    }
+
+    s0(0); // static first frame
+    window.__docScenes=[
+      {label:'KPI Dashboard',fn:s0,from:0,to:.2},
+      {label:'Charts & Analytics',fn:s1,from:.2,to:.4},
+      {label:'Conference Tracker',fn:s2,from:.4,to:.6},
+      {label:'Geographic Analytics',fn:s3,from:.6,to:.8},
+      {label:'AI Recommendations',fn:s4,from:.8,to:1},
+    ];
+  })();
+
+  /* ══════════════════════════════════
+     ORGANIZER SCENES
+  ══════════════════════════════════ */
+  (function(){
+    const{rect,txt,pbar,easeOut,drawBg,pill}=makeDrawer(org.ctx);
+    const ctx=org.ctx,HDR=46;
+
+    function header(tab){
+      rect(0,0,W,HDR,0,C.bg2);
+      ctx.save();ctx.strokeStyle=C.border;ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,HDR);ctx.lineTo(W,HDR);ctx.stroke();ctx.restore();
+      const tabs=['Overview','Conferences','Abstracts','Follow-ups','Reports'];
+      const tw=90;
+      tabs.forEach((t,i)=>{
+        const active=i===(tab||0),tx=20+i*(tw+5);
+        rect(tx,9,tw,28,14,active?'rgba(245,166,35,0.18)':'transparent',active?C.amber:'rgba(245,166,35,0.15)');
+        txt(t,tx+tw/2,28,10,active?C.amber:C.muted,600,'center');
+      });
+      rect(W-168,12,56,22,11,'rgba(62,201,167,0.1)',C.jade);
+      txt('● LIVE',W-140,27,10,C.jade,700,'center');
+      txt('Updated just now',W-14,27,10,C.muted,400,'right');
+    }
+
+    /* S0 – Organizer KPIs */
+    function s0(p){
+      drawBg();header(0);
+      const kpis=[
+        {icon:'🏛️',val:47,suf:'',label:'Conferences Organised',col:C.amber},
+        {icon:'📄',val:142,suf:'',label:'Abstracts This Conf.',col:C.jade},
+        {icon:'⏳',val:50,suf:'',label:'Pending Submission',col:C.coral},
+        {icon:'👥',val:412,suf:'',label:'Registered Attendees',col:C.sky},
+        {icon:'🔬',val:18,suf:'',label:'Awaiting Review',col:C.lilac},
+        {icon:'📅',val:4,suf:'',label:'Upcoming Conferences',col:C.amber},
+      ];
+      const cols=3,cw=Math.floor((W-32-cols*10)/cols),ch=108,sy=HDR+12;
+      kpis.forEach((k,i)=>{
+        const row=Math.floor(i/cols),col=i%cols;
+        const ep=easeOut(Math.max(0,(p-i*0.07)/(1-i*0.05)));
+        const x=16+col*(cw+10),y=sy+row*(ch+10);
+        ctx.save();ctx.globalAlpha=ep;ctx.translate(0,(1-ep)*14);
+        rect(x,y,cw,ch,10,C.card,C.border);
+        rect(x,y,cw,3,[10,10,0,0],k.col);
+        txt(k.icon,x+14,y+30,18,k.col);
+        txt(Math.round(k.val*ep)+k.suf,x+14,y+76,26,C.white,700,'left',cw-20);
+        txt(k.label,x+14,y+96,10,C.muted,500,'left',cw-20);
+        ctx.restore();
+      });
+      pill('📊  Conference At-a-Glance KPIs',C.amber,p,0.65);
+    }
+
+    /* S1 – Active conference status */
+    function s1(p){
+      drawBg();header(1);
+      const PAD=16,GAP=10,cY=HDR+PAD,cH=H-HDR-PAD*2-36;
+      const lw=Math.floor(W*0.38),rw=W-PAD*2-lw-GAP;
+
+      rect(PAD,cY,lw,cH,10,C.card,C.border);
+      txt('IndoMed Cardiology Summit 2026',PAD+14,cY+26,12,C.white,700,'left',lw-20);
+      txt('Mumbai · Sep 12–14 · Deadline Aug 1',PAD+14,cY+44,10,C.muted);
+
+      const boxH=Math.floor((cH-68)/3);
+      const boxes=[
+        {label:'Submitted',val:142,total:192,col:C.jade},
+        {label:'Pending (Invited)',val:50,total:192,col:C.coral},
+        {label:'Under Review',val:18,total:192,col:C.lilac},
+      ];
+      boxes.forEach((b,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.12)/(1-i*0.08)));
+        ctx.save();ctx.globalAlpha=ep;
+        const by=cY+56+i*(boxH+8);
+        rect(PAD+10,by,lw-20,boxH,8,'rgba(255,255,255,0.03)',b.col+'44');
+        txt(Math.round(b.val*ep),PAD+22,by+boxH/2+10,28,b.col,700);
+        txt(b.label,PAD+22,by+boxH/2+26,10,C.muted);
+        pbar(PAD+22,by+boxH-18,lw-44,6,b.col,b.val/b.total*ep,3);
+        txt(b.val+'/'+b.total,PAD+lw-14,by+boxH-12,9,b.col,700,'right');
+        ctx.restore();
+      });
+
+      const rx=PAD+lw+GAP;
+      rect(rx,cY,rw,cH,10,C.card,C.border);
+      txt('Submissions by Specialty',rx+14,cY+26,13,C.white,700,'left',rw-20);
+      txt('Submitted vs Pending',rx+14,cY+44,10,C.muted);
+      const specs=[
+        {name:'Cardiology',sub:42,pend:12,col:C.rose},
+        {name:'Neurology',sub:28,pend:8,col:C.blue},
+        {name:'Oncology',sub:22,pend:6,col:C.purple},
+        {name:'Genomics',sub:18,pend:10,col:C.jade},
+        {name:'Imaging',sub:14,pend:7,col:C.amber},
+        {name:'Surgery',sub:11,pend:5,col:C.sky},
+        {name:'Pediatrics',sub:7,pend:2,col:C.lilac},
+      ];
+      const rowGap=Math.floor((cH-62)/specs.length);
+      specs.forEach((s,i)=>{
+        const ep=easeOut(Math.max(0,(p-0.1-i*0.08)/(1-0.1-i*0.05)));
+        ctx.save();ctx.globalAlpha=ep;
+        const ry=cY+54+i*rowGap;
+        txt(s.name,rx+14,ry+10,10,C.muted,500,'left',88);
+        const bx=rx+108,bw=rw-130,tot=s.sub+s.pend;
+        pbar(bx,ry+2,Math.round(bw*(s.sub/tot)),10,s.col,ep,3);
+        pbar(bx+Math.round(bw*(s.sub/tot))+2,ry+2,Math.round(bw*(s.pend/tot))-2,10,'rgba(255,255,255,0.07)',ep,3);
+        txt(s.sub,rx+rw-46,ry+10,9,s.col,700,'right');
+        txt('+'+s.pend+' pending',rx+rw-8,ry+10,8,C.muted,400,'right');
+        ctx.restore();
+      });
+      pill('🏛️  Active Conference Live Status',C.jade,p,0.72);
+    }
+
+    /* S2 – Room mapping */
+    function s2(p){
+      drawBg();header(1);
+      const PAD=16,cY=HDR+PAD;
+      rect(PAD,cY,W-PAD*2,H-HDR-PAD*2-36,10,C.card,C.border);
+      txt('Conference Room Mapping',PAD+14,cY+26,13,C.white,700);
+      txt('Topic-to-room assignment · ranked by abstract quality score',PAD+14,cY+44,10,C.muted);
+      const rooms=[
+        {tier:'S',room:'Plenary Hall',cap:'800',topic:'Coronary Intervention',score:4.9,match:97,col:C.amber},
+        {tier:'A',room:'Main Hall A',cap:'400',topic:'Heart Failure Outcomes',score:4.6,match:89,col:C.jade},
+        {tier:'A',room:'Main Hall B',cap:'350',topic:'AF Ablation Results',score:4.4,match:84,col:C.jade},
+        {tier:'B',room:'Seminar 1',cap:'120',topic:'Paediatric Cardiology',score:4.1,match:76,col:C.lilac},
+        {tier:'B',room:'Seminar 2',cap:'100',topic:'Cardiac Imaging',score:3.9,match:71,col:C.sky},
+        {tier:'B',room:'Seminar 3',cap:'80',topic:'Electrophysiology',score:3.7,match:68,col:C.blue},
+        {tier:'C',room:'Workshop A',cap:'50',topic:'Live Demo Procedures',score:3.4,match:60,col:C.muted},
+        {tier:'C',room:'Workshop B',cap:'40',topic:'Research Methods',score:3.1,match:54,col:C.muted},
+      ];
+      const cols=4,cw=Math.floor((W-PAD*2-26-cols*8)/cols),ch=100;
+      rooms.forEach((r,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.06)/(1-i*0.04)));
+        const row=Math.floor(i/cols),col=i%cols;
+        const rx=PAD+14+col*(cw+8),ry=cY+56+row*(ch+8);
+        ctx.save();ctx.globalAlpha=ep;ctx.translate(0,(1-ep)*12);
+        rect(rx,ry,cw,ch,8,C.card,r.col+'55');
+        rect(rx,ry,cw,3,[8,8,0,0],r.col);
+        rect(rx+cw-30,ry+8,22,18,5,r.col+'33',r.col);
+        txt(r.tier,rx+cw-19,ry+21,10,r.col,800,'center');
+        txt(r.room,rx+8,ry+22,11,C.white,700,'left',cw-40);
+        txt(r.cap+' seats',rx+8,ry+36,9,C.muted,'left');
+        txt(r.topic,rx+8,ry+52,10,C.white,500,'left',cw-16);
+        txt('⭐ '+r.score,rx+8,ry+66,9,r.col,600);
+        txt('Match:',rx+8,ry+82,8,C.muted);
+        pbar(rx+50,ry+77,cw-62,6,r.col,r.match/100*ep,3);
+        txt(r.match+'%',rx+cw-6,ry+84,8,r.col,700,'right');
+        ctx.restore();
+      });
+      pill('🏨  Room Mapping & Topic Assignment',C.amber,p,0.72);
+    }
+
+    /* S3 – Follow-up table */
+    function s3(p){
+      drawBg();header(3);
+      const PAD=16,cY=HDR+PAD;
+      rect(PAD,cY,W-PAD*2,H-HDR-PAD*2-36,10,C.card,C.border);
+      txt('Doctor Follow-up Priority',PAD+14,cY+26,13,C.white,700);
+      txt('Historical submitters yet to respond · ranked by priority',PAD+14,cY+44,10,C.muted);
+      const COL=[{l:'Doctor',w:158},{l:'Specialty',w:120},{l:'Past Submissions',w:132},{l:'Last Active',w:112},{l:'Priority',w:90},{l:'Action',w:0}];
+      COL[COL.length-1].w=W-PAD*2-28-COL.slice(0,-1).reduce((s,c)=>s+c.w,0);
+      const tX=PAD+14,tY=cY+56,rowH=44;
+      ctx.save();ctx.strokeStyle=C.border;ctx.lineWidth=0.8;
+      ctx.beginPath();ctx.moveTo(tX,tY+2);ctx.lineTo(W-PAD-14,tY+2);ctx.stroke();ctx.restore();
+      let hx=tX;COL.forEach(c=>{txt(c.l.toUpperCase(),hx,tY-2,8,C.muted,700);hx+=c.w;});
+      const docs2=[
+        {name:'Dr. Arun Sharma',spec:'Cardiology',past:7,last:'6 days ago',pri:'High',col:C.coral,cta:'Call Now'},
+        {name:'Dr. Priya Nair',spec:'Neurology',past:5,last:'9 days ago',pri:'High',col:C.coral,cta:'Remind'},
+        {name:'Dr. Rajan Mehta',spec:'Oncology',past:4,last:'2 wks ago',pri:'Med',col:C.amber,cta:'Email'},
+        {name:'Dr. Sunil Rao',spec:'Genomics',past:6,last:'3 wks ago',pri:'Med',col:C.amber,cta:'Email'},
+        {name:'Dr. Kavitha Iyer',spec:'Surgery',past:3,last:'1 month ago',pri:'Low',col:C.jade,cta:'Notify'},
+        {name:'Dr. Vikram Das',spec:'Imaging',past:2,last:'5 wks ago',pri:'Low',col:C.jade,cta:'Notify'},
+      ];
+      docs2.forEach((d,i)=>{
+        const ep=easeOut(Math.max(0,(p-i*0.08)/(1-i*0.05)));
+        ctx.save();ctx.globalAlpha=ep;
+        const ry=tY+8+i*rowH;
+        if(i%2===0)rect(tX,ry,W-PAD*2-28,rowH,4,'rgba(245,166,35,0.02)');
+        let rx=tX;
+        txt(d.name,rx,ry+rowH/2+4,11,C.white,600,'left',COL[0].w-8);rx+=COL[0].w;
+        txt(d.spec,rx,ry+rowH/2+4,10,C.teal,500,'left',COL[1].w-8);rx+=COL[1].w;
+        txt(d.past+' abstracts',rx,ry+rowH/2+4,10,C.blue,400,'left',COL[2].w-8);rx+=COL[2].w;
+        txt(d.last,rx,ry+rowH/2+4,10,C.muted,400,'left',COL[3].w-8);rx+=COL[3].w;
+        rect(rx+2,ry+rowH/2-9,COL[4].w-12,20,10,d.col+'22',d.col+'88');
+        txt(d.pri,rx+(COL[4].w-12)/2+2,ry+rowH/2+4,9,d.col,700,'center');rx+=COL[4].w;
+        rect(rx+2,ry+rowH/2-9,COL[5].w-10,20,5,'rgba(245,166,35,0.1)',C.amber+'88');
+        txt(d.cta+' →',rx+(COL[5].w-10)/2+2,ry+rowH/2+4,9,C.amber,600,'center');
+        ctx.restore();
+      });
+      pill('⚡  Doctor Follow-up Priority Queue',C.amber,p,0.72);
+    }
+
+    /* S4 – Pipeline */
+    function s4(p){
+      drawBg();header(0);
+      const PAD=16,GAP=10,cY=HDR+PAD,cH=H-HDR-PAD*2-36;
+      const lw=Math.floor(W*0.4),rw=W-PAD*2-lw-GAP;
+
+      rect(PAD,cY,lw,cH,10,C.card,C.border);
+      txt('Abstract Pipeline',PAD+14,cY+26,13,C.white,700,'left',lw-20);
+      txt('All upcoming conferences · live status',PAD+14,cY+44,10,C.muted);
+      const cx2=PAD+lw/2,cy2=cY+cH*0.44,dr=Math.min(lw,cH)*0.22;
+      const slices2=[
+        {pct:.45,col:C.jade,l:'Accepted',n:86},
+        {pct:.20,col:C.sky,l:'Under Review',n:38},
+        {pct:.25,col:C.amber,l:'Submitted',n:47},
+        {pct:.10,col:C.coral,l:'Rejected',n:19},
+      ];
+      let ang=-Math.PI/2,drawn=0,sw0=easeOut(Math.min(p/0.8,1))*2*Math.PI;
+      slices2.forEach(s=>{
+        const sw=Math.min(s.pct*2*Math.PI,sw0-drawn);if(sw<=0)return;
+        ctx.save();ctx.shadowColor=s.col;ctx.shadowBlur=10;
+        ctx.beginPath();ctx.moveTo(cx2,cy2);ctx.arc(cx2,cy2,dr,ang,ang+sw);
+        ctx.closePath();ctx.fillStyle=s.col;ctx.fill();ctx.restore();
+        ang+=s.pct*2*Math.PI;drawn+=s.pct*2*Math.PI;
+      });
+      rect(cx2-dr*.62,cy2-dr*.62,dr*1.24,dr*1.24,dr*.62,C.card);
+      txt('190',cx2,cy2+8,20,C.white,700,'center');
+      txt('total',cx2,cy2+23,9,C.muted,400,'center');
+      const legY=cY+cH-70;
+      slices2.forEach((s,i)=>{
+        if(p<0.35)return;
+        ctx.save();ctx.globalAlpha=easeOut((p-0.35)/0.65);
+        rect(PAD+14,legY+i*17-7,8,8,2,s.col);
+        txt(s.l,PAD+28,legY+i*17+1,10,C.muted,400,'left',lw-80);
+        txt(s.n,PAD+lw-14,legY+i*17+1,10,s.col,700,'right');
+        ctx.restore();
+      });
+
+      const rx=PAD+lw+GAP;
+      rect(rx,cY,rw,cH,10,C.card,C.border);
+      txt('Upcoming Conferences',rx+14,cY+26,13,C.white,700,'left',rw-20);
+      txt('Next 6 months · abstract progress',rx+14,cY+44,10,C.muted);
+      const confs=[
+        {name:'IndoMed Cardiology Summit 2026',date:'Sep 12–14',loc:'Mumbai',days:185,sub:142,cap:192,col:C.rose},
+        {name:'National Oncology Congress',date:'Oct 3–6',loc:'Delhi',days:206,sub:86,cap:140,col:C.purple},
+        {name:'NeuroScience India Forum',date:'Nov 18–20',loc:'Bengaluru',days:252,sub:61,cap:100,col:C.teal},
+        {name:'Pediatric Innovation Meet',date:'Dec 5–7',loc:'Chennai',days:269,sub:35,cap:80,col:C.gold},
+      ];
+      const confH=Math.floor((cH-54)/confs.length);
+      confs.forEach((c,i)=>{
+        const ep=easeOut(Math.max(0,(p-0.1-i*0.1)/(1-0.1-i*0.07)));
+        ctx.save();ctx.globalAlpha=ep;
+        const ry=cY+52+i*confH;
+        rect(rx+10,ry,rw-20,confH-8,8,'rgba(255,255,255,0.02)',c.col+'44');
+        rect(rx+10,ry,4,confH-8,[8,0,0,8],c.col);
+        txt(c.name,rx+22,ry+16,11,C.white,700,'left',rw-80);
+        txt('📅 '+c.date+'  📍 '+c.loc,rx+22,ry+30,9,C.muted);
+        pbar(rx+22,ry+40,rw-80,6,c.col,c.sub/c.cap*ep,3);
+        txt(c.sub+'/'+c.cap+' abstracts',rx+22,ry+56,9,c.col,600,'left',rw-90);
+        const urgent=c.days<220;
+        rect(rx+rw-58,ry+8,48,18,9,urgent?'rgba(255,107,138,0.15)':'rgba(0,194,203,0.12)',urgent?C.rose:C.teal);
+        txt(c.days+'d',rx+rw-34,ry+21,8,urgent?C.rose:C.teal,700,'center');
+        ctx.restore();
+      });
+      pill('📅  Pipeline & Conference Schedule',C.sky,p,0.72);
+    }
+
+    s0(0);
+    window.__orgScenes=[
+      {label:'At a Glance KPIs',fn:s0,from:0,to:.2},
+      {label:'Active Conference Status',fn:s1,from:.2,to:.4},
+      {label:'Room Mapping',fn:s2,from:.4,to:.6},
+      {label:'Follow-up Priority',fn:s3,from:.6,to:.8},
+      {label:'Pipeline & Schedule',fn:s4,from:.8,to:1},
+    ];
+  })();
+
+  /* ══════════════════════════════════
+     ENGINE
+  ══════════════════════════════════ */
+  let activeDemo='doctor', startTime=null, running=false;
+  const DURATION=25000;
+  const overlay   = document.getElementById('demo-overlay');
+  const controls  = document.getElementById('demo-controls');
+  const progBar   = document.getElementById('demo-progress');
+  const timerEl   = document.getElementById('demo-timer');
+  const labelEl   = document.getElementById('demo-scene-label');
+  const dots      = document.querySelectorAll('.demo-dot');
+  const urlEl     = document.getElementById('demo-url');
+  const badgeEl   = document.getElementById('demo-badge');
+  const btnDoc    = document.getElementById('toggle-doctor');
+  const btnOrg    = document.getElementById('toggle-organizer');
+
+  window.switchDemo=function(which){
+    if(which===activeDemo)return;
+    activeDemo=which; running=false; startTime=null;
+    doc.c.style.display=which==='doctor'?'block':'none';
+    org.c.style.display=which==='organizer'?'block':'none';
+    if(which==='doctor'){
+      urlEl.innerHTML='<span style="color:rgba(0,194,203,.5);">🔒</span>&nbsp;app.medsociety.health/doctor';
+      badgeEl.textContent='DOCTOR ANALYTICS'; badgeEl.style.color='rgba(0,194,203,.6)';
+      btnDoc.style.cssText='padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:linear-gradient(135deg,var(--teal) 0%,var(--teal-d) 100%);color:var(--ink);box-shadow:0 4px 16px rgba(0,194,203,.35);';
+      btnOrg.style.cssText='padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:transparent;color:rgba(240,246,255,.55);';
+    } else {
+      urlEl.innerHTML='<span style="color:rgba(245,166,35,.5);">🔒</span>&nbsp;app.medsociety.health/organizer';
+      badgeEl.textContent='ORGANIZER DASHBOARD'; badgeEl.style.color='rgba(245,166,35,.7)';
+      btnOrg.style.cssText='padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:linear-gradient(135deg,#F5A623 0%,#D4860A 100%);color:#020D1E;box-shadow:0 4px 16px rgba(245,166,35,.35);';
+      btnDoc.style.cssText='padding:.55rem 1.8rem;border-radius:50px;border:none;cursor:pointer;font-family:Inter,sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;transition:all .25s;background:transparent;color:rgba(240,246,255,.55);';
+    }
+    const scenes=which==='doctor'?window.__docScenes:window.__orgScenes;
+    scenes[0].fn(0);
+    controls.style.display='none';
+    overlay.style.display='flex'; overlay.style.opacity='1';
+    progBar.style.width='0%';
+    dots.forEach((d,i)=>d.classList.toggle('active',i===0));
+  };
+
+  window.startActiveDemo=function(){
+    overlay.style.opacity='0';
+    setTimeout(()=>{overlay.style.display='none';},400);
+    controls.style.display='block';
+    startTime=performance.now(); running=true;
+    requestAnimationFrame(tick);
+  };
+
+  function tick(now){
+    if(!running)return;
+    const elapsed=now-startTime, total=Math.min(elapsed/DURATION,1);
+    const scenes=activeDemo==='doctor'?window.__docScenes:window.__orgScenes;
+    let scene=scenes[scenes.length-1],idx=scenes.length-1;
+    for(let i=0;i<scenes.length;i++){
+      if(total>=scenes[i].from&&total<scenes[i].to){scene=scenes[i];idx=i;break;}
+    }
+    scene.fn(Math.min((total-scene.from)/(scene.to-scene.from),1));
+    progBar.style.width=(total*100)+'%';
+    timerEl.textContent=Math.ceil(Math.max(0,DURATION-elapsed)/1000)+'s';
+    labelEl.textContent=scene.label;
+    dots.forEach((d,i)=>d.classList.toggle('active',i===idx));
+    if(total>=1)startTime=performance.now();
+    requestAnimationFrame(tick);
+  }
+
+  dots.forEach((d,i)=>{
+    d.addEventListener('click',()=>{
+      const scenes=activeDemo==='doctor'?window.__docScenes:window.__orgScenes;
+      if(!running)startActiveDemo();
+      startTime=performance.now()-DURATION*scenes[i].from;
+    });
+  });
+}());
+</script>
+
+
 <section id="about" class="sec">
   <div class="wrap">
     <div class="about-grid">
